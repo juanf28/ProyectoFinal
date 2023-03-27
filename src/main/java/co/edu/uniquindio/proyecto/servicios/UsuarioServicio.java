@@ -12,4 +12,5 @@ public interface UsuarioServicio {
 
     UsuarioDTO obtenerUsuario(int codigoUsuario);
 
+    int actualizarUsuario(String codigoUsuario, UsuarioDTO usuarioDTO)throws Exception;
 }
