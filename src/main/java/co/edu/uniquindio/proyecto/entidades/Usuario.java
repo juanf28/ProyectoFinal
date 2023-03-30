@@ -5,18 +5,22 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Id;
 import lombok.*;
 
+import java.io.Serializable;
+
 @Getter
 @Setter
 @ToString
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public class Usuario {
+public class Usuario extends Persona implements Serializable {
     @Id
     @EqualsAndHashCode.Include
-    private String cedula;
+    private int cedula;
 
     @Column(length = 100, nullable = false)
     private String nombreCompleto;
+
+    @Column(length = 20, nullable = false)
     private String numTelefono;
 
     @Column(length = 50, nullable = false)
@@ -25,6 +29,8 @@ public class Usuario {
     @Column(length = 15, nullable = false)
     private String contrasenia;
     private String estado;
+
+    @Column(length = 100, nullable = false)
     private String direccion;
 
 }

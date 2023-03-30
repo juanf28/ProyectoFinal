@@ -1,9 +1,9 @@
-package co.edu.uniquindio.proyecto.implementacion;
+package co.edu.uniquindio.proyecto.servicios.implementacion;
 
 import co.edu.uniquindio.proyecto.dto.UsuarioDTO;
 import co.edu.uniquindio.proyecto.entidades.Usuario;
 import co.edu.uniquindio.proyecto.repositorios.UsuarioRepo;
-import co.edu.uniquindio.proyecto.servicios.UsuarioServicio;
+import co.edu.uniquindio.proyecto.servicios.interfaces.UsuarioServicio;
 
 import java.util.Optional;
 

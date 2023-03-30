@@ -10,7 +10,7 @@ import org.hibernate.validator.constraints.Length;
 @Setter
 @AllArgsConstructor
 public class UsuarioDTO {
-    String codigo;
+     int codigo;
 
     @NotNull
     @NotBlank

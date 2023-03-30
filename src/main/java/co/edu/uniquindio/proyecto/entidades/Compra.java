@@ -2,7 +2,9 @@ package co.edu.uniquindio.proyecto.entidades;
 
 import jakarta.persistence.Id;
 import lombok.*;
+import org.hibernate.service.spi.ServiceBinding;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
 @Getter
@@ -10,17 +12,18 @@ import java.time.LocalDate;
 @ToString
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public class Compra {
+public class Compra implements Serializable {
 
     @Id
     @EqualsAndHashCode.Include
-   private String id;
+   private int id;
 
    private String idMetodoPago;
-   private String idFuncion;
+
 
    private LocalDate fechaCompra;
-   private double valorTotal;
+   private float valorTotal;
 
+   private int codigoUsuario;
 
 }
