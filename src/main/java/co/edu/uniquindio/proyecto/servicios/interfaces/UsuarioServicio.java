@@ -6,11 +6,11 @@ public interface UsuarioServicio {
 
     int crearUsuario(UsuarioDTO usuarioDTO)throws Exception;
 
-    int actualizarUsuario(int codigoUsuario, UsuarioDTO usuarioDTO);
+    int actualizarUsuario(int codigoUsuario, UsuarioDTO usuarioDTO)throws Exception;
 
-    int eliminarUsuario(int codigoUsuario);
+    int eliminarUsuario(int codigoUsuario)throws Exception;
 
-    UsuarioDTO obtenerUsuario(int codigoUsuario);
+    UsuarioDTO obtenerUsuario(int codigoUsuario)throws Exception;
 
     int actualizarUsuario(String codigoUsuario, UsuarioDTO usuarioDTO)throws Exception;
 }

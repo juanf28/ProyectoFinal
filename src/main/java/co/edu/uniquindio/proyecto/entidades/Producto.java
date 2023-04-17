@@ -42,6 +42,8 @@ public class Producto implements Serializable {
     @Column(nullable = false)
     private boolean activo;
 
+    private int unidades;
+
 
 
 

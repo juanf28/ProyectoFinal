@@ -35,17 +35,17 @@ public class CompraServicioImpl implements CompraServicio {
     private CompraRepo compraRepo;
 
     @Autowired
-    private DetalleCompraRepo  detalleCompraRepo;
+    private DetalleCompraRepo detalleCompraRepo;
 
     @Override
-    public Compra  crearCompra(CompraDTO compraDTO)  throws Exception {
+    public Compra crearCompra(CompraDTO compraDTO) throws Exception {
 
         Usuario usuario = usuarioRepo.findById(compraDTO.getCedulaUsuario()).orElse(null);
 
         List<DetalleCompra> listaDetalles = new ArrayList<DetalleCompra>();
         Compra compra;
         Double totalCompra = 0.0;
-        if (usuario == null){
+        if (usuario == null) {
             throw new Exception("El Usuario no existe.");
         }
 
@@ -53,15 +53,15 @@ public class CompraServicioImpl implements CompraServicio {
         for (int i = 0; i < compraDTO.getDetalleCompraDTO().size(); i++) {
             DetalleCompraDTO detalleCompraAux = compraDTO.getDetalleCompraDTO().get(i);
             Producto producto = productoRepo.findById(detalleCompraAux.getCodigoProducto()).orElse(null);
-            if(producto == null){
-                throw new Exception("El producto " + detalleCompraAux.getCodigoProducto()+ "no existe.");
+            if (producto == null) {
+                throw new Exception("El producto " + detalleCompraAux.getCodigoProducto() + "no existe.");
             }
-            DetalleCompra detalleAux = new DetalleCompra(detalleCompraAux.getUnidades(),detalleCompraAux.getPrecio(),producto);
+            DetalleCompra detalleAux = new DetalleCompra(detalleCompraAux.getUnidades(), detalleCompraAux.getPrecio(), producto);
             listaDetalles.add(detalleAux);
             totalCompra += detalleCompraAux.getPrecio();
         }
 
-        compra = new Compra(totalCompra,LocalDateTime.now(),compraDTO.getMetodoPago(),usuario );
+        compra = new Compra(totalCompra, LocalDateTime.now(), compraDTO.getMetodoPago(), usuario);
         compra = compraRepo.save(compra);
 
         for (DetalleCompra detalle : listaDetalles) {
@@ -78,6 +78,10 @@ public class CompraServicioImpl implements CompraServicio {
         List<CompraGetDTO> listaCompraGetDto = new ArrayList<CompraGetDTO>();
         Usuario usuario = usuarioRepo.findById(cedula).orElse(null);
         List<Compra> listaCompras = compraRepo.listarComprasUsuario(cedula);
-        if(usuario == null) {
+        if (usuario == null) {
             throw new Exception("El Usuario no existe.");
         }
+        return listaCompraGetDto;
+    }
+}
+
