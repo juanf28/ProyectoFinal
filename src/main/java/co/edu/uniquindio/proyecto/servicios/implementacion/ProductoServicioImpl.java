@@ -35,10 +35,13 @@ public class ProductoServicioImpl implements ProductoServicio {
     }
 
     @Override
-    public int actualizarProducto(int codigoProducto, ProductoDTO productoDTO) {
-        return 0;
+    public actualizarProducto(int codigoProducto, ProductoDTO productoDTO) throws Exception {
+        validarProductoExiste(codigoProducto);
+        Producto producto = convertirDTO(productoDTO);
+        producto.setCodigo(codigoProducto);
+        return convertir(productoRepo.save(producto));
     }
-
+    }
     @Override
     public int eliminarProducto(int codigoProducto) {
         return 0;
