@@ -3,18 +3,14 @@ package co.edu.uniquindio.proyecto.servicios.implementacion;
 
 import co.edu.uniquindio.proyecto.dto.ProductoDTO;
 import co.edu.uniquindio.proyecto.dto.ProductoGetDTO;
-import co.edu.uniquindio.proyecto.dto.UsuarioDTO;
-import co.edu.uniquindio.proyecto.dto.UsuarioGetDTO;
 import co.edu.uniquindio.proyecto.entidades.Categoria;
 import co.edu.uniquindio.proyecto.entidades.Estado;
 import co.edu.uniquindio.proyecto.entidades.Producto;
-import co.edu.uniquindio.proyecto.entidades.Usuario;
 import co.edu.uniquindio.proyecto.repositorios.ProductoRepo;
 import co.edu.uniquindio.proyecto.servicios.interfaces.ProductoServicio;
 import co.edu.uniquindio.proyecto.servicios.interfaces.UsuarioServicio;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
-
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +21,7 @@ import java.util.Optional;
 public class ProductoServicioImpl implements ProductoServicio {
 
     private final ProductoRepo productoRepo;
+
     private UsuarioServicio usuarioServicio;
 
     public ProductoServicioImpl(ProductoRepo productoRepo){
@@ -83,9 +80,20 @@ public class ProductoServicioImpl implements ProductoServicio {
     }
 
     @Override
+    public Producto obtener(int codigoProducto) throws Exception{
+        Optional<Producto> producto = productoRepo.findById(codigoProducto);
+
+        if(producto.isEmpty() ){
+            throw new Exception("El productp "+codigoProducto+" no está asociado a ningún producto");
+        }
+
+        return producto.get();
+    }
+
+    @Override
     public ProductoGetDTO obtenerProducto(int codigoProducto) throws Exception {
 
-        return null;
+        return convertir(obtener(codigoProducto) );
     }
 
     @Override
@@ -136,17 +144,35 @@ public class ProductoServicioImpl implements ProductoServicio {
 
     @Override
     public List<ProductoGetDTO> listarProductosCategoria(Categoria categoria) throws Exception {
-        return null;
+        List<Producto> lista = productoRepo.listarProductosCategoria(categoria);
+        List<ProductoGetDTO> respuesta = new ArrayList<>();
+
+        for (Producto p : lista){
+            respuesta.add(convertir(p));
+        }
+        return respuesta;
     }
 
     @Override
-    public List<ProductoGetDTO> listarProductosPorEstado() throws Exception {
-        return null;
+    public List<ProductoGetDTO> listarProductosPorEstado(Estado estado) throws Exception {
+        List<Producto> lista = productoRepo.listarProductosPorEstado(estado);
+        List<ProductoGetDTO> respuesta = new ArrayList<>();
+
+        for (Producto p : lista){
+            respuesta.add(convertir(p));
+        }
+        return respuesta;
     }
 
     @Override
     public List<ProductoGetDTO> listarProductosFavoritos(int codigoUsuario) throws Exception {
-        return null;
+        List<Producto> lista = productoRepo.listarProductosFavoritos(codigoUsuario);
+        List<ProductoGetDTO> respuesta = new ArrayList<>();
+        for (Producto p : lista){
+
+            respuesta.add(convertir(p));
+        }
+        return respuesta;
     }
 
 

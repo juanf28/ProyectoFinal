@@ -4,6 +4,7 @@ import co.edu.uniquindio.proyecto.dto.ProductoDTO;
 import co.edu.uniquindio.proyecto.dto.ProductoGetDTO;
 import co.edu.uniquindio.proyecto.entidades.Categoria;
 import co.edu.uniquindio.proyecto.entidades.Estado;
+import co.edu.uniquindio.proyecto.entidades.Producto;
 
 import java.util.List;
 
@@ -20,13 +21,15 @@ public interface ProductoServicio {
 
    ProductoGetDTO obtenerProducto(int codigoProducto)throws Exception;
 
+   Producto obtener(int codigoProducto) throws Exception;
+
    List<ProductoGetDTO> listarProductosUsuario(int codigoUsuario)throws Exception;
 
    List<ProductoGetDTO> listarProductosCategoria(Categoria categoria)throws Exception;
 
-   List<ProductoGetDTO> listarProductosPorEstado()throws Exception;
+    List<ProductoGetDTO> listarProductosPorEstado(Estado estado) throws Exception;
 
-   List<ProductoGetDTO> listarProductosFavoritos(int codigoUsuario)throws Exception;
+    List<ProductoGetDTO> listarProductosFavoritos(int codigoUsuario)throws Exception;
 
    List<ProductoGetDTO> listarProductosNombre(String nombre)throws Exception;
 
