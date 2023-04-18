@@ -1,6 +1,7 @@
 package co.edu.uniquindio.proyecto.dto;
 
-import co.edu.uniquindio.proyecto.modelo.Categoria;
+import co.edu.uniquindio.proyecto.entidades.Categoria;
+import co.edu.uniquindio.proyecto.entidades.Estado;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -17,7 +18,7 @@ public class ProductoGetDTO {
 
     private LocalDateTime fechaLimite;
 
-    private boolean estado;
+    private Estado estado;
 
     private LocalDateTime fechaCreacion;
 
@@ -29,9 +30,9 @@ public class ProductoGetDTO {
 
     private int unidades;
 
-    private String cedulaUsuario;
+    private int cedulaUsuario;
 
-    private Map<String, String> imagenes;
+    private  List<String> imagenes;;
 
     private List<Categoria> categorias;
 

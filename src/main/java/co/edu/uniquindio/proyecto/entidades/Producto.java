@@ -1,11 +1,12 @@
 package co.edu.uniquindio.proyecto.entidades;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 import java.io.Serializable;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 
 
 @Getter
@@ -23,8 +24,7 @@ public class Producto implements Serializable {
 
     @Column(length = 100, nullable = false)
     private String nombre;
-
-    private String imagen;
+    private List<String> imagen;
 
     @Column(nullable = false)
     private String descripcion;
@@ -37,12 +37,18 @@ public class Producto implements Serializable {
     private LocalDateTime fechaCreacion;
 
     @Column(nullable = false)
-    private LocalDate fechaDevolucion;
+    private LocalDateTime fechaLimite;
 
     @Column(nullable = false)
-    private boolean activo;
+    private Estado estado;
 
+    @Column(nullable = false)
     private int unidades;
+
+    @Column(nullable = false)
+    private Usuario vendedor;
+    @Column(nullable = false)
+    public List<Categoria> categoria;
 
 
 

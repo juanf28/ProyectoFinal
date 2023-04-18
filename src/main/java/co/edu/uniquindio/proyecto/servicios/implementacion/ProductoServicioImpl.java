@@ -3,93 +3,189 @@ package co.edu.uniquindio.proyecto.servicios.implementacion;
 
 import co.edu.uniquindio.proyecto.dto.ProductoDTO;
 import co.edu.uniquindio.proyecto.dto.ProductoGetDTO;
+import co.edu.uniquindio.proyecto.dto.UsuarioDTO;
+import co.edu.uniquindio.proyecto.dto.UsuarioGetDTO;
 import co.edu.uniquindio.proyecto.entidades.Categoria;
+import co.edu.uniquindio.proyecto.entidades.Estado;
 import co.edu.uniquindio.proyecto.entidades.Producto;
+import co.edu.uniquindio.proyecto.entidades.Usuario;
 import co.edu.uniquindio.proyecto.repositorios.ProductoRepo;
 import co.edu.uniquindio.proyecto.servicios.interfaces.ProductoServicio;
+import co.edu.uniquindio.proyecto.servicios.interfaces.UsuarioServicio;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
+@AllArgsConstructor
 public class ProductoServicioImpl implements ProductoServicio {
 
     private final ProductoRepo productoRepo;
+    private UsuarioServicio usuarioServicio;
 
     public ProductoServicioImpl(ProductoRepo productoRepo){
         this.productoRepo=productoRepo;
     }
 
-    @Override
-    public int crearProducto(ProductoDTO productoDTO)throws Exception {
-        Producto producto = new Producto();
 
+    @Override
+    public int crearProducto(ProductoDTO productoDTO) throws Exception {
+
+        Producto producto = new Producto();
+        producto.setNombre( productoDTO.getNombre() );
+        producto.setDescripcion( productoDTO.getDescripcion() );
+        producto.setUnidades( productoDTO.getUnidades() );
+        producto.setPrecio( productoDTO.getPrecio() );
+        producto.setVendedor(usuarioServicio.obtener( productoDTO.getCodigoVendedor() ) );
+        producto.setImagen(productoDTO.getImagenes());
+        producto.setCategoria(productoDTO.getCategorias() );
+        producto.setEstado(Estado.INACTIVO);
+        producto.setFechaCreacion( LocalDateTime.now() );
+        producto.setFechaLimite(LocalDateTime.now().plusDays(60));
+
+        return productoRepo.save( producto ).getCodigo();
+
+    }
+
+    @Override
+    public ProductoGetDTO actualizarProducto(int codigoProducto, ProductoDTO productoDTO) throws Exception {
+
+        validarExiste(codigoProducto);
+
+        Producto producto = convertir (productoDTO);
+        producto.setCodigo(codigoProducto);
+
+        return convertir(productoRepo.save(producto));
+    }
+
+    public int actualizarUnidades(int codigoProducto, int unidades) throws Exception{
+
+        return 0;
+    }
+
+    public int actualizarEstado(int codigoProducto, Estado estado) throws Exception{
+
+        return 0;
+    }
+
+
+    @Override
+    public int eliminarProducto(int codigoProducto) throws Exception {
+
+        validarExiste(codigoProducto);
+
+        productoRepo.findById(codigoProducto);
+        return codigoProducto;
+    }
+
+    @Override
+    public ProductoGetDTO obtenerProducto(int codigoProducto) throws Exception {
+
+        return null;
+    }
+
+    @Override
+    public List<ProductoGetDTO> listarProductosUsuario(int codigoUsuario) throws Exception {
+
+        List<Producto> lista = productoRepo.listarProductosUsuario(codigoUsuario);
+        List<ProductoGetDTO> respuesta = new ArrayList<>();
+
+        for(Producto p : lista){
+            respuesta.add( convertir(p) );
+        }
+
+        return respuesta;
+    }
+
+    private Producto convertir(ProductoDTO productoDTO){
+
+        Producto producto = new Producto();
         producto.setNombre(productoDTO.getNombre());
         producto.setDescripcion(productoDTO.getDescripcion());
         producto.setPrecio(productoDTO.getPrecio());
-        producto.setUnidades(productoDTO.getUnidades());
+        producto.setEstado(productoDTO.getEstado());
+        producto.setCategoria(productoDTO.getCategorias());
+        producto.setCodigo(productoDTO.getCodigo());
+        producto.setImagen(productoDTO.getImagenes());
+        producto.setCodigoVendedor(productoDTO.getCodigoVendedor());
+        return producto;
+    }
 
+    private ProductoGetDTO convertir(Producto producto){
 
-        return 0;
+        ProductoGetDTO productoGetDTO = new ProductoGetDTO(
+                producto.getCodigo(),
+                producto.getEstado(),
+                producto.getFechaLimite(),
+                producto.getFechaCreacion(),
+                producto.getNombre(),
+                producto.getDescripcion(),
+                producto.getUnidades(),
+                producto.getPrecio(),
+                producto.getVendedor().getCedula(),
+                producto.getImagen(),
+                producto.getCategoria()
+        );
+
+        return productoGetDTO;
     }
 
     @Override
-    public actualizarProducto(int codigoProducto, ProductoDTO productoDTO) throws Exception {
-        validarProductoExiste(codigoProducto);
-        Producto producto = convertirDTO(productoDTO);
-        producto.setCodigo(codigoProducto);
-        return convertir(productoRepo.save(producto));
-    }
-    }
-    @Override
-    public int eliminarProducto(int codigoProducto) {
-        return 0;
-    }
-
-    @Override
-    public ProductoDTO obtenerProducto(int codigoProducto) {
+    public List<ProductoGetDTO> listarProductosCategoria(Categoria categoria) throws Exception {
         return null;
     }
 
     @Override
-    public List<ProductoGetDTO> listarProductosUsuario(int codigoUsuario) {
+    public List<ProductoGetDTO> listarProductosPorEstado() throws Exception {
         return null;
     }
 
     @Override
-    public List<ProductoGetDTO> listarProductosCategoria(Categoria categoria) {
+    public List<ProductoGetDTO> listarProductosFavoritos(int codigoUsuario) throws Exception {
         return null;
     }
 
-    @Override
-    public List<ProductoDTO> listarProductosPorEstado() {
-        return null;
-    }
 
     @Override
-    public List<ProductoGetDTO> listarProductosFavoritos(int codigoUsuario) {
-        return null;
-    }
+    public List<ProductoGetDTO> listarProductosNombre(String nombre) throws Exception {
+        List<Producto> lista = productoRepo.listarProductosNombre(nombre);
+        List<ProductoGetDTO> respuesta = new ArrayList<>();
 
-    @Override
-    public List<ProductoDTO> listarProductosNombre(String nombre) {
-
-        List<Producto> productos = productoRepo.findAll();
-        List<Producto> solucion= new ArrayList<>();
-
-
-        for(Producto producto: productos){
-            if (producto.getNombre().equals(nombre)){
-                solucion.add(producto);
-            }
+        for (Producto p : lista) {
+            respuesta.add(convertir(p));
         }
-
-        return null;
+        return respuesta;
     }
 
+
     @Override
-    public List<ProductoDTO> listarProductosPrecio(float precioMinimo, float precioMaximo) {
-        return null;
+    public List<ProductoGetDTO> listarProductosPrecio(float precioMinimo, float precioMaximo) throws Exception {
+        List<Producto> lista = productoRepo.listarProductosPrecio(precioMinimo, precioMaximo);
+        List<ProductoGetDTO> respuesta = new ArrayList<>();
+
+        for(Producto p: lista){
+            respuesta.add(convertir(p));
+        }
+        return respuesta;
+    }
+
+    private void validarProducto(int codigoProducto)throws Exception {
+
+        Optional<Producto> producto = productoRepo.findById(codigoProducto);
+
+        if (producto.isPresent()) {
+            throw new Exception("El usuario con el codigo " + codigoProducto+ "no existe");
+        }
+    }
+    private void validarExiste(int codigoProducto) throws Exception {
+        boolean existe = productoRepo.existsById(codigoProducto);
+
+        if (!existe) {
+            throw new Exception("El código " + codigoProducto + " no está asociado a ningún producto");
+        }
     }
 }

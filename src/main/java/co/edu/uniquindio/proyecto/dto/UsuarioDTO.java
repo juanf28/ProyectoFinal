@@ -9,26 +9,27 @@ import org.hibernate.validator.constraints.Length;
 @Getter
 @Setter
 @AllArgsConstructor
+@ToString
 public class UsuarioDTO {
-     int codigo;
+    private int cedula;
 
     @NotNull
     @NotBlank
 
-    String nombre;
+    private String nombre;
 
     @NotNull
     @NotBlank
     @Email
     @Length(max=150)
-    String email;
-    String contrasenia;
+   private String email;
+    private String contrasenia;
 
 
-    String direccion;
+    private String direccion;
 
     @NotNull
     @NotBlank
     @Length(max=12)
-    String telefono;
+    private String telefono;
 }

@@ -1,4 +1,6 @@
 package co.edu.uniquindio.proyecto.servicios.implementacion;
 
-public class ModeradorServicioImpl {
+import co.edu.uniquindio.proyecto.servicios.interfaces.ModeradorServicio;
+
+public class ModeradorServicioImpl implements ModeradorServicio {
 }

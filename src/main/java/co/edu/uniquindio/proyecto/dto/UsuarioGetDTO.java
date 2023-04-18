@@ -12,7 +12,7 @@ import lombok.ToString;
 @ToString
 public class UsuarioGetDTO {
 
-    private int codigo;
+    private int cedula;
 
     private String nombre;
 

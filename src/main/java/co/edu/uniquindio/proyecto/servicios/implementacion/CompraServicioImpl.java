@@ -3,10 +3,10 @@ package co.edu.uniquindio.proyecto.servicios.implementacion;
 import co.edu.uniquindio.proyecto.dto.CompraDTO;
 import co.edu.uniquindio.proyecto.dto.CompraGetDTO;
 import co.edu.uniquindio.proyecto.dto.DetalleCompraDTO;
-import co.edu.uniquindio.proyecto.modelo.Compra;
-import co.edu.uniquindio.proyecto.modelo.DetalleCompra;
-import co.edu.uniquindio.proyecto.modelo.Producto;
-import co.edu.uniquindio.proyecto.modelo.Usuario;
+import co.edu.uniquindio.proyecto.entidades.Compra;
+import co.edu.uniquindio.proyecto.entidades.DetalleCompra;
+import co.edu.uniquindio.proyecto.entidades.Producto;
+import co.edu.uniquindio.proyecto.entidades.Usuario;
 import co.edu.uniquindio.proyecto.repositorios.CompraRepo;
 import co.edu.uniquindio.proyecto.repositorios.DetalleCompraRepo;
 import co.edu.uniquindio.proyecto.repositorios.ProductoRepo;
@@ -40,7 +40,7 @@ public class CompraServicioImpl implements CompraServicio {
     @Override
     public Compra crearCompra(CompraDTO compraDTO) throws Exception {
 
-        Usuario usuario = usuarioRepo.findById(compraDTO.getCedulaUsuario()).orElse(null);
+        Usuario usuario = usuarioRepo.findById(compraDTO.getCodigoUsuario());
 
         List<DetalleCompra> listaDetalles = new ArrayList<DetalleCompra>();
         Compra compra;
@@ -73,15 +73,23 @@ public class CompraServicioImpl implements CompraServicio {
 
 
     @Override
-    public List<CompraGetDTO> listarComprasUsuario(String cedula) throws Exception {
+    public List<CompraGetDTO> listarCompras(int codigoUsuario) throws Exception {
 
         List<CompraGetDTO> listaCompraGetDto = new ArrayList<CompraGetDTO>();
-        Usuario usuario = usuarioRepo.findById(cedula).orElse(null);
-        List<Compra> listaCompras = compraRepo.listarComprasUsuario(cedula);
+       // Usuario usuario = usuarioRepo.findById(codigoUsuario).orElse(null);
+
+        Usuario usuario = usuarioRepo.
+        List<Compra> listaCompras = compraRepo.listarCompras(codigoUsuario);
         if (usuario == null) {
             throw new Exception("El Usuario no existe.");
         }
         return listaCompraGetDto;
+    }
+
+    public CompraGetDTO obtenerCompra (CompraGetDTO compraGetDTO) throws Exception {
+
+
+        return compraGetDTO;
     }
 }
 

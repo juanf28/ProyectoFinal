@@ -10,7 +10,7 @@ import lombok.*;
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @ToString
 
-public class Moderador {
+public class Moderador extends Usuario {
 
     @Id
     @EqualsAndHashCode.Include
