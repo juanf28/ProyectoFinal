@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/usuarios")
 public class UsuarioControlador {
 
-    private final UsuarioServicio usuarioServicio;
+    private final UsuarioServicio usuarioServicio =null;
 
     @PostMapping("/crear")
     public int crearUsuario(@RequestBody UsuarioDTO usuarioDTO) throws Exception {
