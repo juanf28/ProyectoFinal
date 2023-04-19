@@ -9,7 +9,6 @@ import co.edu.uniquindio.proyecto.entidades.Producto;
 import co.edu.uniquindio.proyecto.repositorios.ProductoRepo;
 import co.edu.uniquindio.proyecto.servicios.interfaces.ProductoServicio;
 import co.edu.uniquindio.proyecto.servicios.interfaces.UsuarioServicio;
-import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -17,17 +16,16 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-@AllArgsConstructor
 public class ProductoServicioImpl implements ProductoServicio {
 
     private final ProductoRepo productoRepo;
 
-    private UsuarioServicio usuarioServicio;
+    private final UsuarioServicio usuarioServicio;
 
-    public ProductoServicioImpl(ProductoRepo productoRepo){
+    public ProductoServicioImpl(ProductoRepo productoRepo, UsuarioServicio usuarioServicio){
         this.productoRepo=productoRepo;
+        this.usuarioServicio=usuarioServicio;
     }
-
 
     @Override
     public int crearProducto(ProductoDTO productoDTO) throws Exception {
@@ -37,7 +35,7 @@ public class ProductoServicioImpl implements ProductoServicio {
         producto.setDescripcion( productoDTO.getDescripcion() );
         producto.setUnidades( productoDTO.getUnidades() );
         producto.setPrecio( productoDTO.getPrecio() );
-        producto.setVendedor(usuarioServicio.obtener( productoDTO.getCodigoVendedor() ) );
+        producto.setVendedor(usuarioServicio.obtener( productoDTO.getCodigoVendedor()));
         producto.setImagen(productoDTO.getImagenes());
         producto.setCategoria(productoDTO.getCategorias() );
         producto.setEstado(Estado.INACTIVO);
@@ -126,17 +124,18 @@ public class ProductoServicioImpl implements ProductoServicio {
     private ProductoGetDTO convertir(Producto producto){
 
         ProductoGetDTO productoGetDTO = new ProductoGetDTO(
-                producto.getCodigo(),
-                producto.getEstado(),
+               producto.getCodigo(),
                 producto.getFechaLimite(),
+                producto.getEstado(),
                 producto.getFechaCreacion(),
                 producto.getNombre(),
                 producto.getDescripcion(),
-                producto.getUnidades(),
                 producto.getPrecio(),
-                producto.getVendedor().getCedula(),
+                producto.getUnidades(),
+                producto.getCodigoVendedor(),
                 producto.getImagen(),
-                producto.getCategoria()
+                producto.getCategoria(),
+                producto.getVendedor()
         );
 
         return productoGetDTO;

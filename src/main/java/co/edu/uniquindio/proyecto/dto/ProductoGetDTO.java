@@ -31,7 +31,7 @@ public class ProductoGetDTO {
 
     private int unidades;
 
-    private int cedulaUsuario;
+    private int codigoUsuario;
 
     private  List<String> imagenes;;
 
