@@ -12,7 +12,6 @@ import java.io.Serializable;
 @Getter
 @Setter
 @ToString
-@NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Usuario extends Persona implements Serializable {
     @Id
@@ -35,5 +34,18 @@ public class Usuario extends Persona implements Serializable {
 
     @Column(length = 100, nullable = false)
     private String direccion;
+
+
+    /*
+    public Usuario(String nombreCompleto, String cedula, String numTelefono, String email, String contrasenia, String direccion){
+        super(nombreCompleto, cedula, contrasenia);
+        this.numTelefono=numTelefono;
+        this.email=email;
+        this.direccion=direccion;
+
+
+    }
+
+     */
 
 }
