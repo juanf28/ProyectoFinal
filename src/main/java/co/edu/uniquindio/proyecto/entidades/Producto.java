@@ -13,7 +13,7 @@ import java.util.List;
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @ToString
-
+@Entity
 public class Producto implements Serializable {
 
     @Id
@@ -23,6 +23,9 @@ public class Producto implements Serializable {
 
     @Column(length = 100, nullable = false)
     private String nombre;
+
+    @ElementCollection
+    @Column(nullable = false)
     private List<String> imagen;
 
     @Column(nullable = false)
@@ -30,7 +33,7 @@ public class Producto implements Serializable {
     @Column(nullable = false)
     private float precio;
 
-    @ManyToMany
+    @Column(nullable = false)
     private int codigoVendedor;
     @Column(nullable = false)
     private LocalDateTime fechaCreacion;
@@ -38,22 +41,19 @@ public class Producto implements Serializable {
     @Column(nullable = false)
     private LocalDateTime fechaLimite;
 
+    @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private Estado estado;
 
     @Column(nullable = false)
     private int unidades;
 
-    @Column(nullable = false)
+    @ManyToOne
+    @JoinColumn
     private Usuario vendedor;
+
+    @ManyToMany
     @Column(nullable = false)
     public List<Categoria> categoria;
-
-
-
-
-
-
-
 
 }

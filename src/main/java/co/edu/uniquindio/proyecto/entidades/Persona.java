@@ -3,7 +3,6 @@ package co.edu.uniquindio.proyecto.entidades;
 import lombok.Builder;
 
 import java.io.Serializable;
-// cifuentes y mosquera niches
 public class Persona implements Serializable {
     private String nombreCompleto;
     private  String cedula;

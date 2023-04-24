@@ -1,6 +1,32 @@
 package co.edu.uniquindio.proyecto.entidades;
 
-public enum Categoria {
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import lombok.Getter;
+import lombok.Setter;
+import org.springframework.data.annotation.Id;
 
+@Entity
+@Getter
+@Setter
+public class Categoria {
+
+    @jakarta.persistence.Id
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private String nombre;
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    // getters y setters
 }

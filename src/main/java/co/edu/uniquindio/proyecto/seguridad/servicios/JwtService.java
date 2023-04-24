@@ -20,6 +20,7 @@ import java.util.stream.Collectors;
 @Setter
 @Getter
 @ToString
+@Service
 public class JwtService {
     @Value("${jwt.secret}")
     private String secretKey;
