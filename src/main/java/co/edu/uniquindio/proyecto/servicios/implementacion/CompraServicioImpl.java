@@ -1,12 +1,12 @@
 package co.edu.uniquindio.proyecto.servicios.implementacion;
-import java.util.Optional;
+
 import co.edu.uniquindio.proyecto.dto.CompraDTO;
 import co.edu.uniquindio.proyecto.dto.CompraGetDTO;
 import co.edu.uniquindio.proyecto.dto.DetalleCompraDTO;
-import co.edu.uniquindio.proyecto.entidades.Compra;
-import co.edu.uniquindio.proyecto.entidades.DetalleCompra;
-import co.edu.uniquindio.proyecto.entidades.Producto;
-import co.edu.uniquindio.proyecto.entidades.Usuario;
+import co.edu.uniquindio.proyecto.modelo.Compra;
+import co.edu.uniquindio.proyecto.modelo.DetalleCompra;
+import co.edu.uniquindio.proyecto.modelo.Producto;
+import co.edu.uniquindio.proyecto.modelo.Usuario;
 import co.edu.uniquindio.proyecto.repositorios.CompraRepo;
 import co.edu.uniquindio.proyecto.repositorios.DetalleCompraRepo;
 import co.edu.uniquindio.proyecto.repositorios.ProductoRepo;
@@ -15,15 +15,16 @@ import co.edu.uniquindio.proyecto.servicios.interfaces.CompraServicio;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import java.time.LocalDateTime;
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor
 public class CompraServicioImpl implements CompraServicio {
+
     @Autowired
     private UsuarioRepo usuarioRepo;
 
@@ -39,78 +40,48 @@ public class CompraServicioImpl implements CompraServicio {
     @Override
     public Compra crearCompra(CompraDTO compraDTO) throws Exception {
 
-        Optional<Usuario> usuario = usuarioRepo.findById(compraDTO.getCodigoUsuario());
-        if (!usuario.isPresent()) {
+        Usuario usuario = usuarioRepo.findById(compraDTO.getCedulaUsuario()).orElse(null);
+
+        List<DetalleCompra> listaDetalles = new ArrayList<DetalleCompra>();
+        Compra compra;
+        Double totalCompra = 0.0;
+        if (usuario == null) {
             throw new Exception("El Usuario no existe.");
         }
 
-        List<DetalleCompra> listaDetalles = new ArrayList<DetalleCompra>();
-        Compra compra = new Compra();
-        Double totalCompra = 0.0;
-        if (compraDTO.getDetalleCompraDTO().isEmpty()) {
-            throw new Exception("La lista de detalles de compra está vacía.");
-        }
 
         for (int i = 0; i < compraDTO.getDetalleCompraDTO().size(); i++) {
             DetalleCompraDTO detalleCompraAux = compraDTO.getDetalleCompraDTO().get(i);
             Producto producto = productoRepo.findById(detalleCompraAux.getCodigoProducto()).orElse(null);
             if (producto == null) {
-                throw new Exception("El producto " + detalleCompraAux.getCodigoProducto() + " no existe.");
+                throw new Exception("El producto " + detalleCompraAux.getCodigoProducto() + "no existe.");
             }
-            DetalleCompra detalleCompra = new DetalleCompra();
-            detalleCompra.setCodigoCompra(producto.getCodigo());
-            detalleCompra.setPrecioProducto(detalleCompraAux.getPrecio());
-            detalleCompra.setUnidades(detalleCompraAux.getUnidades());
-            //DetalleCompra detalleAux = new DetalleCompra(detalleCompraAux.getUnidades(), detalleCompraAux.getPrecio(), producto.getNombre());
-            DetalleCompra detalleAux = detalleCompra;
+            DetalleCompra detalleAux = new DetalleCompra(detalleCompraAux.getUnidades(), detalleCompraAux.getPrecio(), producto);
             listaDetalles.add(detalleAux);
             totalCompra += detalleCompraAux.getPrecio();
         }
 
-        if(usuario.isPresent()) {
-            compra.setValorTotal(totalCompra.floatValue());
-            compra.setFechaCompra(LocalDate.now());
-            compra.setIdMetodoPago(compraDTO.getMetodoPago().getDescripcion());
-            compra.setCodigoUsuario(usuario.get().getCedula());
-
-            compra = compraRepo.save(compra);
-        } else {
-            // Manejar el caso en que usuario no está presente
-        }
-
-
+        compra = new Compra(totalCompra, LocalDateTime.now(), compraDTO.getMetodoPago(), usuario);
+        compra = compraRepo.save(compra);
 
         for (DetalleCompra detalle : listaDetalles) {
-            detalle.setCodigoCompra(compra.getId());
+            detalle.setCompra(compra);
             detalleCompraRepo.save(detalle);
         }
-
         return compra;
     }
 
 
     @Override
-    public CompraGetDTO obtenerCompra(int codigoCompra) throws Exception {
-        return null;
-    }
-
-
-    @Override
-    public List<CompraGetDTO> listarCompras(int codigoUsuario) throws Exception {
+    public List<CompraGetDTO> listarComprasUsuario(String cedula) throws Exception {
 
         List<CompraGetDTO> listaCompraGetDto = new ArrayList<CompraGetDTO>();
-       // Usuario usuario = usuarioRepo.findById(codigoUsuario).orElse(null);
-
-        //Usuario usuario = usuarioRepo.
-        List<Compra> listaCompras = compraRepo.listarCompras(codigoUsuario);
-
+        Usuario usuario = usuarioRepo.findById(cedula).orElse(null);
+        List<Compra> listaCompras = compraRepo.listarComprasUsuario(cedula);
+        if (usuario == null) {
+            throw new Exception("El Usuario no existe.");
+        }
         return listaCompraGetDto;
-    }
-
-    public CompraGetDTO obtenerCompra (CompraGetDTO compraGetDTO) throws Exception {
-
-
-        return compraGetDTO;
     }
 }
 

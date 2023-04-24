@@ -18,9 +18,9 @@ import java.util.List;
 public class Producto implements Serializable {
 
     @Id
-    @EqualsAndHashCode.Include
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int codigo;
+    @EqualsAndHashCode.Include
+    private Integer codigo;
 
     @Column(length = 100, nullable = false)
     private String nombre;
