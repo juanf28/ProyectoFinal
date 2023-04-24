@@ -1,6 +1,5 @@
 package co.edu.uniquindio.proyecto.dto;
 
-import co.edu.uniquindio.proyecto.entidades.DetalleCompra;
 import co.edu.uniquindio.proyecto.entidades.MetodoPago;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -23,4 +22,8 @@ public class CompraDTO {
 
     private LocalDate fechaCompra;
     private float valorTotal;
+
+    public int getCedulaUsuario() {
+        return 0;
+    }
 }

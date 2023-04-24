@@ -16,4 +16,5 @@ public interface CompraRepo extends JpaRepository<Compra,String> {
     List<Compra> listarCompras(int codigoUsuario);
 
 
+    List<Compra> listarComprasUsuario(String cedula);
 }

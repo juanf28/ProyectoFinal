@@ -3,10 +3,10 @@ package co.edu.uniquindio.proyecto.servicios.implementacion;
 import co.edu.uniquindio.proyecto.dto.CompraDTO;
 import co.edu.uniquindio.proyecto.dto.CompraGetDTO;
 import co.edu.uniquindio.proyecto.dto.DetalleCompraDTO;
-import co.edu.uniquindio.proyecto.modelo.Compra;
-import co.edu.uniquindio.proyecto.modelo.DetalleCompra;
-import co.edu.uniquindio.proyecto.modelo.Producto;
-import co.edu.uniquindio.proyecto.modelo.Usuario;
+import co.edu.uniquindio.proyecto.entidades.Compra;
+import co.edu.uniquindio.proyecto.entidades.DetalleCompra;
+import co.edu.uniquindio.proyecto.entidades.Producto;
+import co.edu.uniquindio.proyecto.entidades.Usuario;
 import co.edu.uniquindio.proyecto.repositorios.CompraRepo;
 import co.edu.uniquindio.proyecto.repositorios.DetalleCompraRepo;
 import co.edu.uniquindio.proyecto.repositorios.ProductoRepo;
@@ -19,7 +19,6 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -38,15 +37,19 @@ public class CompraServicioImpl implements CompraServicio {
     private DetalleCompraRepo detalleCompraRepo;
 
     @Override
-    public Compra crearCompra(CompraDTO compraDTO) throws Exception {
+    public Compra crearCompra(CompraDTO compraDTO) {
 
         Usuario usuario = usuarioRepo.findById(compraDTO.getCedulaUsuario()).orElse(null);
 
-        List<DetalleCompra> listaDetalles = new ArrayList<DetalleCompra>();
+        List<DetalleCompra> listaDetalles = new ArrayList<>();
         Compra compra;
-        Double totalCompra = 0.0;
+        double totalCompra = 0.0;
         if (usuario == null) {
-            throw new Exception("El Usuario no existe.");
+            try {
+                throw new Exception("El Usuario no existe.");
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
         }
 
 
@@ -54,7 +57,11 @@ public class CompraServicioImpl implements CompraServicio {
             DetalleCompraDTO detalleCompraAux = compraDTO.getDetalleCompraDTO().get(i);
             Producto producto = productoRepo.findById(detalleCompraAux.getCodigoProducto()).orElse(null);
             if (producto == null) {
-                throw new Exception("El producto " + detalleCompraAux.getCodigoProducto() + "no existe.");
+                try {
+                    throw new Exception("El producto " + detalleCompraAux.getCodigoProducto() + "no existe.");
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
             }
             DetalleCompra detalleAux = new DetalleCompra(detalleCompraAux.getUnidades(), detalleCompraAux.getPrecio(), producto);
             listaDetalles.add(detalleAux);
@@ -71,13 +78,23 @@ public class CompraServicioImpl implements CompraServicio {
         return compra;
     }
 
+    @Override
+    public List<CompraGetDTO> listarCompras(int codigoUsuario) {
+        return null;
+    }
+
+    @Override
+    public CompraGetDTO obtenerCompra(int codigoCompra) {
+        return null;
+    }
+
 
     @Override
     public List<CompraGetDTO> listarComprasUsuario(String cedula) throws Exception {
 
-        List<CompraGetDTO> listaCompraGetDto = new ArrayList<CompraGetDTO>();
-        Usuario usuario = usuarioRepo.findById(cedula).orElse(null);
-        List<Compra> listaCompras = compraRepo.listarComprasUsuario(cedula);
+        List<CompraGetDTO> listaCompraGetDto = new ArrayList<>();
+        Usuario usuario = usuarioRepo.findById(Integer.valueOf(cedula)).orElse(null);
+        compraRepo.listarComprasUsuario(cedula);
         if (usuario == null) {
             throw new Exception("El Usuario no existe.");
         }

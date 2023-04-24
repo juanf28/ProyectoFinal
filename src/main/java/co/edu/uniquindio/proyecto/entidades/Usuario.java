@@ -1,10 +1,12 @@
 package co.edu.uniquindio.proyecto.entidades;
 
-import co.edu.uniquindio.proyecto.dto.UsuarioDTO;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
-import lombok.*;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 import java.io.Serializable;
 
@@ -35,7 +37,11 @@ public class Usuario extends Persona implements Serializable {
     @Column(length = 100, nullable = false)
     private String direccion;
 
-   // public Object getCodigo() {
+    public Object getCodigo() {
+        return null;
+    }
+
+    // public Object getCodigo() {
      //   return cedula;
     //}
 

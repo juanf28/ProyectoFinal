@@ -2,10 +2,10 @@ package co.edu.uniquindio.proyecto.entidades;
 
 import jakarta.persistence.Id;
 import lombok.*;
-import org.hibernate.service.spi.ServiceBinding;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -26,4 +26,7 @@ public class Compra implements Serializable {
 
    private int codigoUsuario;
 
+    public Compra(Double totalCompra, LocalDateTime now, MetodoPago metodoPago, Usuario usuario) {
+
+    }
 }

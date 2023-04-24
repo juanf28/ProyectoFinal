@@ -1,30 +1,45 @@
 package co.edu.uniquindio.proyecto.entidades;
 
-
-import jakarta.persistence.Column;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.Positive;
 import lombok.*;
 
+import java.io.Serializable;
+
+@Entity
 @Getter
 @Setter
-@ToString
 @NoArgsConstructor
-@EqualsAndHashCode
-public class DetalleCompra {
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@ToString
+public class DetalleCompra implements Serializable {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include
-    @Column(length = 100, nullable = false)
-    private int codigo;
+    private Integer codigo;
 
-    @Column(length = 100, nullable = false)
-    private int unidades;
+    @Positive
+    @Column(nullable = false)
+    private Integer unidades;
 
-    @Column( nullable = false)
+    @Positive
+    @Column(nullable = false)
     private float precioProducto;
-    @Column(length = 100, nullable = false)
-    private int codigoCompra;
-    @Column(length = 100, nullable = false)
-    private int codigoProducto;
 
+    @ManyToOne
+    @JoinColumn(nullable = false)
+    private Producto producto;
+
+    @ManyToOne
+    @JoinColumn(nullable = false)
+    private Compra compra;
+
+    @Builder
+    public DetalleCompra(Integer unidades, float precioProducto, Producto producto) {
+        this.unidades = unidades;
+        this.precioProducto = precioProducto;
+        this.producto = producto;
+        this.compra = compra;
+    }
 }
