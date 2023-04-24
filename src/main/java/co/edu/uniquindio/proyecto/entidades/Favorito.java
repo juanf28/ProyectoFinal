@@ -8,18 +8,16 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 
 import java.io.Serializable;
 
-@Entity
-@IdClass(FavoritoId.class)
 public class Favorito {
     @EmbeddedId
     private FavoritoId id;
 
     @ManyToOne
-    @JoinColumn(name = "codigo_producto")
+    @JoinColumn(name = "codigo_producto", insertable=false, updatable=false)
     private Producto producto;
 
     @ManyToOne
-    @JoinColumn(name ="codigo_usuario")
+    @JoinColumn(name ="codigo_usuario", insertable=false, updatable=false)
     private Usuario usuario;
 
     // constructor, getters y setters
