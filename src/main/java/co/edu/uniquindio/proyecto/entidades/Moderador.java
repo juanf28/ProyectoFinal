@@ -6,7 +6,7 @@ import lombok.*;
 
 @Getter
 @Setter
-@NoArgsConstructor
+
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @ToString
 
@@ -16,5 +16,11 @@ public class Moderador extends Usuario {
     @EqualsAndHashCode.Include
     @Column(length = 15, nullable = false)
     private int codigo;
+    /*
+    @Builder
+    public Moderador(int codigo){
+        super();
+    }
 
+     */
 }
