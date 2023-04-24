@@ -15,12 +15,7 @@ public class Moderador extends Usuario {
     @Id
     @EqualsAndHashCode.Include
     @Column(length = 15, nullable = false)
-    private int codigo;
-    /*
-    @Builder
-    public Moderador(int codigo){
-        super();
-    }
 
-     */
+    private int codigo;
+   
 }

@@ -37,9 +37,7 @@ public class Usuario extends Persona implements Serializable {
     @Column(length = 100, nullable = false)
     private String direccion;
 
-    public Object getCodigo() {
-        return null;
-    }
+    private int codigo;
 
     // public Object getCodigo() {
      //   return cedula;
