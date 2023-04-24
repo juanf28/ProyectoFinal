@@ -14,8 +14,8 @@ public class EmailServicioImpl implements EmailServicio {
 
     private final JavaMailSender javaMailSender;
     @Override
-    public void enviarEmail(EmailDTO emailDTO) throws Exception{
-        MimeMessage mensaje = javaMailSender.createMimeMessage();
+    public void enviarEmail(EmailDTO emailDTO) {
+        var mensaje = javaMailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(mensaje);
         try{
             helper.setSubject(emailDTO.getAsunto());
