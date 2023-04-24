@@ -10,7 +10,7 @@ import co.edu.uniquindio.proyecto.servicios.interfaces.ComentarioServicio;
 import co.edu.uniquindio.proyecto.servicios.interfaces.EmailServicio;
 import co.edu.uniquindio.proyecto.servicios.interfaces.ProductoServicio;
 import co.edu.uniquindio.proyecto.servicios.interfaces.UsuarioServicio;
-import co.edu.uniquindio.proyecto.servicios.repositorios.ComentarioRepo;
+import co.edu.uniquindio.proyecto.repositorios.ComentarioRepo;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
