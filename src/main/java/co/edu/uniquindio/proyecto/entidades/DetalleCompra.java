@@ -10,6 +10,7 @@ import java.io.Serializable;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @ToString
 public class DetalleCompra implements Serializable {
@@ -17,11 +18,11 @@ public class DetalleCompra implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include
-    private Integer codigo;
+    private int codigo;
 
     @Positive
     @Column(nullable = false)
-    private Integer unidades;
+    private int unidades;
 
     @Positive
     @Column(nullable = false)
@@ -35,11 +36,5 @@ public class DetalleCompra implements Serializable {
     @JoinColumn(nullable = false)
     private Compra compra;
 
-    @Builder
-    public DetalleCompra(Integer unidades, float precioProducto, Producto producto) {
-        this.unidades = unidades;
-        this.precioProducto = precioProducto;
-        this.producto = producto;
-        this.compra = compra;
-    }
+
 }

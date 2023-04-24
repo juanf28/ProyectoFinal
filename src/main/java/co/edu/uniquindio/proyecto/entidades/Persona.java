@@ -6,14 +6,8 @@ import java.io.Serializable;
 public class Persona implements Serializable {
     private String nombreCompleto;
     private  String cedula;
+
+    private String email;
     private String contrasenia;
 
-    /*
-    public Persona(String nombreCompleto, String cedula, String contrasenia) {
-        this.nombreCompleto=nombreCompleto;
-        this.cedula=cedula;
-        this.contrasenia=contrasenia;
-    }
-
-     */
 }

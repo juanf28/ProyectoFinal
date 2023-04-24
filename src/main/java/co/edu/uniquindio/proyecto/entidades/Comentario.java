@@ -21,7 +21,7 @@ public class Comentario implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include
-    private Integer codigo;
+    private int codigo;
 
     @NotNull
     @Lob
@@ -33,10 +33,10 @@ public class Comentario implements Serializable {
     private LocalDateTime fechaCreacion;
 
     @ManyToOne
-    @JoinColumn(nullable = false)
+    @JoinColumn(name = "codigo_producto")
     private Producto producto;
 
     @ManyToOne
-    @JoinColumn(nullable = false)
+    @JoinColumn(name = "codigo_usuario")
     private Usuario usuario;
 }

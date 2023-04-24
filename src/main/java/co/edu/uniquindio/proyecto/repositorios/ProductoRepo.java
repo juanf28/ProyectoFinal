@@ -13,7 +13,7 @@ import java.util.List;
 @Repository
 public interface ProductoRepo extends JpaRepository<Producto,Integer> {
 
-    @Query("select p from Producto p where p.vendedor.codigo = :codigoUsuario")
+    @Query("select p from Producto p where p.moderador.codigo = :codigoUsuario")
     List<Producto> listarProductosUsuario(int codigoUsuario);
 
     @Query("select p from Producto p where p.nombre like concat('%', :nombre, '%') = :nombre and p.estado = ACTIVO")

@@ -1,9 +1,9 @@
 package co.edu.uniquindio.proyecto.entidades;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.List;
 
 @Getter
 @Setter
@@ -17,11 +17,12 @@ public class Moderador extends Usuario {
     @EqualsAndHashCode.Include
     @Column(length = 15, nullable = false)
     private int codigo;
-    /*
-    @Builder
-    public Moderador(int codigo){
-        super();
-    }
 
-     */
+    @Column
+    String correo;
+
+    @OneToMany(mappedBy="producto")
+    List<Producto> productos;
+
+
 }

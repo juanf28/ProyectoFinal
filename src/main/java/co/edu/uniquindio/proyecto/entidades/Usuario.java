@@ -3,12 +3,14 @@ package co.edu.uniquindio.proyecto.entidades;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Getter
@@ -32,28 +34,15 @@ public class Usuario extends Persona implements Serializable {
 
     @Column(length = 15, nullable = false)
     private String contrasenia;
-    private String estado;
+
+    @OneToMany(mappedBy = "comentario")
+    private List<Comentario> comentarios;
 
     @Column(length = 100, nullable = false)
     private String direccion;
 
-    private int codigo;
+    @OneToMany(mappedBy = "favorito")
+    List<Favorito> favoritos;
 
-    // public Object getCodigo() {
-     //   return cedula;
-    //}
-
-
-    /*
-    public Usuario(String nombreCompleto, String cedula, String numTelefono, String email, String contrasenia, String direccion){
-        super(nombreCompleto, cedula, contrasenia);
-        this.numTelefono=numTelefono;
-        this.email=email;
-        this.direccion=direccion;
-
-
-    }
-
-     */
 
 }
