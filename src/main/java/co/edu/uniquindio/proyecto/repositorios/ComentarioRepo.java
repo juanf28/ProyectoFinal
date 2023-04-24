@@ -1,4 +1,4 @@
-package co.edu.uniquindio.unimarket.repositorios;
+package co.edu.uniquindio.proyecto.repositorios;
 
 import co.edu.uniquindio.proyecto.entidades.Comentario;
 import co.edu.uniquindio.proyecto.entidades.Producto;
