@@ -31,8 +31,8 @@ public class ModeradorServicioImpl implements ModeradorServicio {
             throw new Exception(("El correo "+ moderadorDTO.getCorreo() +"ya existe"));
         }
 
-        moderador.setCodigo(moderadorDTO.getCodigo());
-        moderador.setCorreo(moderadorDTO.getCorreo());
+        moderador.setCedula(moderadorDTO.getCodigo());
+        moderador.setEmail(moderadorDTO.getCorreo());
 
 
 

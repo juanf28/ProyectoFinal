@@ -36,7 +36,7 @@ public class Compra implements Serializable {
     @Column(nullable = false)
    private int codigoUsuario;
 
-    @OneToMany(mappedBy = "codigo_compra")
+    @OneToMany(mappedBy = "compra")
     ArrayList<DetalleCompra> detalleCompraList;
 
 }
