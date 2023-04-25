@@ -3,8 +3,10 @@ package co.edu.uniquindio.proyecto.entidades;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.awt.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -13,24 +15,24 @@ import java.util.List;
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @ToString
-
+@Entity
 public class Producto implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @EqualsAndHashCode.Include
-    private Integer codigo;
+    private int codigo;
 
     @Column(length = 100, nullable = false)
     private String nombre;
-    private List<String> imagen;
 
+    @OneToMany(mappedBy = "producto")
+    List<Imagen> imagenes;
     @Column(nullable = false)
     private String descripcion;
     @Column(nullable = false)
     private float precio;
 
-    @ManyToMany
+    @Column(nullable = false)
     private int codigoVendedor;
     @Column(nullable = false)
     private LocalDateTime fechaCreacion;
@@ -38,22 +40,32 @@ public class Producto implements Serializable {
     @Column(nullable = false)
     private LocalDateTime fechaLimite;
 
-    @Column(nullable = false)
-    private Estado estado;
+    @ManyToOne
+    @JoinColumn(name = "codigo_vendedor")
+    ProductoModerador productoModerador;
+
+    @ManyToOne
+    Moderador moderador;
 
     @Column(nullable = false)
     private int unidades;
 
-    @Column(nullable = false)
-    private Usuario vendedor;
-    @Column(nullable = false)
-    public List<Categoria> categoria;
+    @OneToMany(mappedBy = "producto")
+    private List<ProductoModerador> moderadores;
 
 
+    @OneToMany(mappedBy = "comentario")
+    private List<Comentario> comentarios;
 
+    @OneToMany(mappedBy = "favorito")
+    List<Favorito> favoritos;
 
+    @OneToMany(mappedBy = "detalle_compra")
+    List<DetalleCompra> detalleCompraList;
 
+    @OneToMany
+    List<Categoria> categorias;
 
-
-
+    @ManyToOne
+    private Estado estado;
 }

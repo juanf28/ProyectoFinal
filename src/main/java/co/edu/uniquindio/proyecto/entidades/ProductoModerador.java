@@ -1,14 +1,13 @@
 package co.edu.uniquindio.proyecto.entidades;
 
-import jakarta.persistence.Id;
-import lombok.*;
-
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
+import org.hibernate.validator.constraints.Length;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Getter
@@ -16,27 +15,36 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @ToString
-public class Comentario implements Serializable {
+public class ProductoModerador implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include
     private int codigo;
 
+    @Length(max = 50)
     @NotNull
-    @Lob
-    @Column(nullable = false)
-    private String mensaje;
+    @Column(length = 50, nullable = false)
+    private String motivo;
 
     @NotNull
     @Column(nullable = false)
-    private LocalDateTime fechaCreacion;
+    private LocalDateTime fecha;
+
+    @ManyToOne
+    @JoinColumn(name = "codigo_moderador")
+    Moderador moderador;
 
     @ManyToOne
     @JoinColumn(name = "codigo_producto")
     private Producto producto;
 
+
     @ManyToOne
-    @JoinColumn(name = "codigo_usuario")
-    private Usuario usuario;
+    @JoinColumn(name="codigo_estado")
+    Estado estado;
+
+
+
+
 }

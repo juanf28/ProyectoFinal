@@ -40,7 +40,7 @@ public class ComentarioServicioImpl implements ComentarioServicio {
         comentario.setUsuario(usuarioServicio.obtener(comentarioDTO.getCodigoUsuario()));
 
         //se debe enviar un email (al usuario que publicó el producto) con lo que escribió la persona.
-        String emailVendedor = producto.getVendedor().getEmail();
+        String emailVendedor = producto.getModerador().getEmail();
         EmailServicio.enviarEmail(new EmailDTO(
                 "Nuevo comentario",
                 comentarioDTO.getMensaje(),
@@ -76,7 +76,7 @@ public class ComentarioServicioImpl implements ComentarioServicio {
                 comentario.getCodigo(),
                 comentario.getFechaCreacion(),
                 comentario.getMensaje(),
-                comentario.getUsuario().getCodigo(),
+                comentario.getUsuario().getCedula(),
                 comentario.getProducto().getCodigo()
         );
     }

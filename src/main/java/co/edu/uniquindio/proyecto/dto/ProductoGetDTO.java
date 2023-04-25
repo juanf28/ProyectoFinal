@@ -1,8 +1,6 @@
 package co.edu.uniquindio.proyecto.dto;
 
-import co.edu.uniquindio.proyecto.entidades.Categoria;
-import co.edu.uniquindio.proyecto.entidades.Estado;
-import co.edu.uniquindio.proyecto.entidades.Usuario;
+import co.edu.uniquindio.proyecto.entidades.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -33,10 +31,10 @@ public class ProductoGetDTO {
 
     private int codigoUsuario;
 
-    private  List<String> imagenes;;
+    private  List<Imagen> imagenes;;
 
     private List<Categoria> categorias;
 
-    private Usuario vendedor;
+    private Moderador moderador;
 
 }
