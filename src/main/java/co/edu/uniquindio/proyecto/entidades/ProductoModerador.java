@@ -42,8 +42,7 @@ public class ProductoModerador implements Serializable {
     @JoinColumn(name="codigo_estado")
     private Estado estado;
 
-    @OneToMany(mappedBy = "producto")
-    List<ProductoModerador> productosModerador;
+
 
 
 }
