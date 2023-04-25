@@ -17,29 +17,17 @@ import java.util.List;
 @Setter
 @ToString
 public class Usuario extends Persona implements Serializable {
-    @Id
-    private int cedula;
-
-    @Column(length = 100, nullable = false)
-    private String nombreCompleto;
 
     @Column(length = 20, nullable = false)
     private String numTelefono;
 
-
-    @Column(length = 50, nullable = false)
-    private String email;
-
-    @Column(length = 15, nullable = false)
-    private String contrasenia;
-
-    @OneToMany(mappedBy = "codigo_usuario")
+    @OneToMany(mappedBy = "usuario")
     private List<Comentario> comentarios;
 
     @Column(length = 100, nullable = false)
     private String direccion;
 
-    @OneToMany(mappedBy = "codigo_usuario")
+    @OneToMany(mappedBy = "usuario")
     List<Favorito> favoritos;
 
 

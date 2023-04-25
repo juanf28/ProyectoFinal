@@ -33,6 +33,6 @@ public class ProductoGetDTO {
 
     private List<Categoria> categorias;
 
-    private Moderador moderador;
+    private Usuario vendedor;
 
 }

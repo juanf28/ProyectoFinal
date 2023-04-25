@@ -27,7 +27,7 @@ public class DetalleCompra implements Serializable {
     private float precioProducto;
 
     @ManyToOne
-    @JoinColumn(name = "codigo_compra")
+    @JoinColumn(name = "codigo_producto")
     private Producto producto;
 
     @ManyToOne

@@ -15,6 +15,7 @@ import java.util.List;
 @NoArgsConstructor
 @ToString
 @Entity
+
 public class Producto implements Serializable {
 
     @Id
@@ -30,9 +31,6 @@ public class Producto implements Serializable {
     private String descripcion;
     @Column(nullable = false)
     private float precio;
-
-    @Column(nullable = false)
-    private int codigoVendedor;
     @Column(nullable = false)
     private LocalDateTime fechaCreacion;
 
@@ -40,26 +38,26 @@ public class Producto implements Serializable {
     private LocalDateTime fechaLimite;
 
     @ManyToOne
-    @JoinColumn(name = "codigo_vendedor")
+    @JoinColumn(name = "codigo_producto")
     ProductoModerador productoModerador;
 
     @ManyToOne
-    Moderador moderador;
+    private Usuario vendedor;
 
     @Column(nullable = false)
     private int unidades;
 
-    @OneToMany(mappedBy = "codigo_producto")
-    private List<ProductoModerador> moderadores;
+    @OneToMany(mappedBy = "producto")
+    private List<ProductoModerador> productoModeradores;
 
 
-    @OneToMany(mappedBy = "codigo_producto")
+    @OneToMany(mappedBy = "producto")
     private List<Comentario> comentarios;
 
-    @OneToMany(mappedBy = "codigo_producto")
+    @OneToMany(mappedBy = "producto")
     List<Favorito> favoritos;
 
-    @OneToMany(mappedBy = "codigo_compra")
+    @OneToMany(mappedBy = "compra")
     List<DetalleCompra> detalleCompraList;
 
     @ManyToMany(mappedBy = "productos")
@@ -67,5 +65,7 @@ public class Producto implements Serializable {
 
     @ManyToOne
     private Estado estado;
+
+
 
 }
