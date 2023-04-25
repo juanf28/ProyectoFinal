@@ -47,9 +47,6 @@ public class Producto implements Serializable {
     @Column(nullable = false)
     private int unidades;
 
-    @OneToMany(mappedBy = "producto")
-    private List<ProductoModerador> productoModeradores;
-
 
     @OneToMany(mappedBy = "producto")
     private List<Comentario> comentarios;
@@ -57,7 +54,7 @@ public class Producto implements Serializable {
     @OneToMany(mappedBy = "producto")
     List<Favorito> favoritos;
 
-    @OneToMany(mappedBy = "compra")
+    @OneToMany(mappedBy = "producto")
     List<DetalleCompra> detalleCompraList;
 
     @ManyToMany(mappedBy = "productos")

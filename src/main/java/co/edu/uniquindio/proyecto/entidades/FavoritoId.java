@@ -3,6 +3,7 @@ package co.edu.uniquindio.proyecto.entidades;
 import jakarta.persistence.Embeddable;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,6 +17,8 @@ import java.io.Serializable;
 @AllArgsConstructor
 @NoArgsConstructor
 public class FavoritoId implements Serializable{
+
     private int codigo_producto;
+
     private int codigo_usuario;
 }

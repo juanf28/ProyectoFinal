@@ -13,11 +13,11 @@ public class Favorito {
     @EmbeddedId
     private FavoritoId id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "codigo_producto", insertable=false, updatable=false)
     private Producto producto;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name ="codigo_usuario", insertable=false, updatable=false)
     private Usuario usuario;
 

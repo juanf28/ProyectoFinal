@@ -5,6 +5,7 @@ import jakarta.validation.constraints.Positive;
 import lombok.*;
 
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Getter
