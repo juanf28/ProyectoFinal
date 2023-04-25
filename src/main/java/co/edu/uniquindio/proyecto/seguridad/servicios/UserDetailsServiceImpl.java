@@ -19,7 +19,8 @@ import java.util.Optional;
 @Setter
 @Getter
 @ToString
-@Service@Transactional
+@Service
+@Transactional
 public class UserDetailsServiceImpl implements UserDetailsService {
 
 

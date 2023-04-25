@@ -8,6 +8,8 @@ import lombok.Setter;
 
 
 import java.io.Serializable;
+import java.util.List;
+
 @Entity
 @Getter
 @Setter
@@ -15,13 +17,12 @@ public class Categoria {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @EqualsAndHashCode.Include
     private int id;
 
     private String nombre;
 
-    @ManyToOne
-    Producto producto;
+    @ManyToMany
+    List<Producto> productos;
 
 
 }

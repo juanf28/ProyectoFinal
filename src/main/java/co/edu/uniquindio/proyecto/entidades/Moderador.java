@@ -8,13 +8,11 @@ import java.util.List;
 @Getter
 @Setter
 @Entity
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @ToString
 
 public class Moderador extends Usuario {
 
     @Id
-    @EqualsAndHashCode.Include
     @Column(length = 15, nullable = false)
     private int codigo;
 

@@ -17,8 +17,6 @@ public class ProductoGetDTO {
 
     private LocalDateTime fechaLimite;
 
-    private Estado estado;
-
     private LocalDateTime fechaCreacion;
 
     private String nombre;

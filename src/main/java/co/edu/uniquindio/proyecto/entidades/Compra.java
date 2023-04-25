@@ -17,11 +17,9 @@ import java.util.ArrayList;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Compra implements Serializable {
 
     @Id
-    @EqualsAndHashCode.Include
     private int id;
 
     @Column(nullable = false)
@@ -38,7 +36,7 @@ public class Compra implements Serializable {
     @Column(nullable = false)
    private int codigoUsuario;
 
-    @OneToMany(mappedBy = "detalle_compra")
+    @OneToMany(mappedBy = "codigo_compra")
     ArrayList<DetalleCompra> detalleCompraList;
 
 }

@@ -40,7 +40,6 @@ public class ProductoServicioImpl implements ProductoServicio {
         producto.setPrecio( productoDTO.getPrecio() );
         producto.setCategorias(productoDTO.getCategorias());
         producto.setModerador(moderadorServicio.obtener(productoDTO.getCodigoVendedor()));
-        producto.setEstado(productoDTO.getEstado());
         producto.setFechaCreacion( LocalDateTime.now() );
         producto.setFechaLimite(LocalDateTime.now().plusDays(60));
 
@@ -115,7 +114,6 @@ public class ProductoServicioImpl implements ProductoServicio {
         producto.setNombre(productoDTO.getNombre());
         producto.setDescripcion(productoDTO.getDescripcion());
         producto.setPrecio(productoDTO.getPrecio());
-        producto.setEstado(productoDTO.getEstado());
         producto.setCategorias(productoDTO.getCategorias());
         producto.setCodigo(productoDTO.getCodigo());
         producto.setImagenes(productoDTO.getImagenes());
@@ -128,7 +126,6 @@ public class ProductoServicioImpl implements ProductoServicio {
         ProductoGetDTO productoGetDTO = new ProductoGetDTO(
                producto.getCodigo(),
                 producto.getFechaLimite(),
-                producto.getEstado(),
                 producto.getFechaCreacion(),
                 producto.getNombre(),
                 producto.getDescripcion(),

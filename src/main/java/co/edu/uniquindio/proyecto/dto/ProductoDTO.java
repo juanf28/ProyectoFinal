@@ -34,7 +34,7 @@ public class ProductoDTO {
     private int unidades;
     @PositiveOrZero
     private float precio;
-    private Estado estado;
+
     @Positive
     private int codigoVendedor;
 

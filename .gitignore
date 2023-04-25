@@ -1,5 +1,6 @@
+/.idea/
 *.class
-/bin/
-/.metadata/
-/tmp/
-/.project/
+/.gradle/
+/*/bin/
+/*/build/
+/build/
