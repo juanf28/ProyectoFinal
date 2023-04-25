@@ -19,7 +19,7 @@ public interface ProductoRepo extends JpaRepository<Producto,Integer> {
     @Query("select p from Producto p where p.nombre like concat('%', :nombre, '%') = :nombre and p.estado = ACTIVO")
     List<Producto> listarProductosNombre(String nombre);
 
-    @Query("select p from Producto p where p.categoria and p.estado = :ACTIVO")
+    @Query("select p from Producto p where p.categorias and p.estado = :ACTIVO")
     List<Producto> listarProductosCategoria(Categoria categoria);
 
     @Query("select p from Producto p where p.estado = :ACTIVO")

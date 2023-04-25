@@ -13,7 +13,6 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @ToString
 @Entity
 public class Producto implements Serializable {
@@ -50,22 +49,23 @@ public class Producto implements Serializable {
     @Column(nullable = false)
     private int unidades;
 
-    @OneToMany(mappedBy = "producto")
+    @OneToMany(mappedBy = "codigo_producto")
     private List<ProductoModerador> moderadores;
 
 
-    @OneToMany(mappedBy = "comentario")
+    @OneToMany(mappedBy = "codigo_producto")
     private List<Comentario> comentarios;
 
-    @OneToMany(mappedBy = "favorito")
+    @OneToMany(mappedBy = "codigo_producto")
     List<Favorito> favoritos;
 
-    @OneToMany(mappedBy = "detalle_compra")
+    @OneToMany(mappedBy = "codigo_compra")
     List<DetalleCompra> detalleCompraList;
 
-    @OneToMany
+    @ManyToMany(mappedBy = "productos")
     List<Categoria> categorias;
 
     @ManyToOne
     private Estado estado;
+
 }

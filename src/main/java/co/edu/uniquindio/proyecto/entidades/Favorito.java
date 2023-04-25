@@ -8,6 +8,7 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 
 import java.io.Serializable;
 
+@Entity
 public class Favorito {
     @EmbeddedId
     private FavoritoId id;

@@ -11,13 +11,11 @@ import java.io.Serializable;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @ToString
 public class DetalleCompra implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @EqualsAndHashCode.Include
     private int codigo;
 
     @Positive
@@ -29,11 +27,11 @@ public class DetalleCompra implements Serializable {
     private float precioProducto;
 
     @ManyToOne
-    @JoinColumn(nullable = false)
+    @JoinColumn(name = "codigo_compra")
     private Producto producto;
 
     @ManyToOne
-    @JoinColumn(nullable = false)
+    @JoinColumn(name = "codigo_compra")
     private Compra compra;
 
 

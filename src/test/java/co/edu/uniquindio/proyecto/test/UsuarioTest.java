@@ -15,16 +15,7 @@ import java.util.ArrayList;
 public class UsuarioTest {
     @Autowired
     private UsuarioRepo usuarioRepo;
-    /*
-    @Test
-    public void registrar(){
-        //ArrayList<String> telefonos = new ArrayList<>();
-        Usuario usuario= new Usuario("pepito","1006336782","3165308532","pepito@email.com","root","calle 19");
-        Usuario usuarioGuardado = usuarioRepo.save(usuario);
-
-        Assertions.assertEquals("pepito", usuarioGuardado.getNombreCompleto());
-    }
-    */
+    
     public void eliminar(){
 
     }

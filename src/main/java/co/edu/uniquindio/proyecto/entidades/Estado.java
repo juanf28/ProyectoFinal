@@ -1,10 +1,7 @@
 package co.edu.uniquindio.proyecto.entidades;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
-import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -31,7 +28,10 @@ public class Estado {
     @OneToMany(mappedBy = "estado")
     private List<ProductoModerador> moderadores;
 
-
-
-
+    @OneToMany(mappedBy = "estado")
+    List<Producto> productos;
 }
+
+
+
+

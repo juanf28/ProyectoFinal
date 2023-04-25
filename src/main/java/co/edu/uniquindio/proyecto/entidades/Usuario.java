@@ -16,10 +16,8 @@ import java.util.List;
 @Getter
 @Setter
 @ToString
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Usuario extends Persona implements Serializable {
     @Id
-    @EqualsAndHashCode.Include
     private int cedula;
 
     @Column(length = 100, nullable = false)
@@ -35,13 +33,13 @@ public class Usuario extends Persona implements Serializable {
     @Column(length = 15, nullable = false)
     private String contrasenia;
 
-    @OneToMany(mappedBy = "comentario")
+    @OneToMany(mappedBy = "codigo_usuario")
     private List<Comentario> comentarios;
 
     @Column(length = 100, nullable = false)
     private String direccion;
 
-    @OneToMany(mappedBy = "favorito")
+    @OneToMany(mappedBy = "codigo_usuario")
     List<Favorito> favoritos;
 
 

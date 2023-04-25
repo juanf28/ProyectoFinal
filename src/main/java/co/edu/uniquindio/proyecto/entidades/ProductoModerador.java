@@ -13,13 +13,11 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @ToString
 public class ProductoModerador implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @EqualsAndHashCode.Include
     private int codigo;
 
     @Length(max = 50)
@@ -42,9 +40,10 @@ public class ProductoModerador implements Serializable {
 
     @ManyToOne
     @JoinColumn(name="codigo_estado")
-    Estado estado;
+    private Estado estado;
 
-
+    @OneToMany(mappedBy = "producto")
+    List<ProductoModerador> productosModerador;
 
 
 }
