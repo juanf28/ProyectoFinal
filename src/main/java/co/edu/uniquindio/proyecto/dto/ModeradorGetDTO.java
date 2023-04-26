@@ -10,7 +10,10 @@ import lombok.ToString;
 @Setter
 @ToString
 public class ModeradorGetDTO {
-    private int cedula;
-    private String email;
+    private int codigo;
+    private String nombre;
+    private String password;
 
+    private String correo;
 }
+

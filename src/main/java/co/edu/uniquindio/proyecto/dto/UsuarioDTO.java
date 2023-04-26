@@ -15,17 +15,27 @@ public class UsuarioDTO {
 
     @NotNull
     @NotBlank
+    @Length(max=160, message = "El nombre es demasiado largo ")
 
     private String nombre;
 
     @NotNull
     @NotBlank
     @Email
-    @Length(max=150)
+    @Length(max=150, message = "Correo demasiado extenso ")
    private String email;
+
+
+    @NotNull
+    @NotBlank
+    @Email
+    @Length(max=150, message = "Contraseña demasiado extensa, excede los 150 caracteres ")
     private String contrasenia;
 
-
+    @NotNull
+    @NotBlank
+    @Email
+    @Length(max=100, message = "Direccion demasiado larga ")
     private String direccion;
 
     @NotNull

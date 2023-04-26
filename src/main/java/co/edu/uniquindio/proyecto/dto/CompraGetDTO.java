@@ -15,10 +15,12 @@ import java.util.List;
 @ToString
 public class CompraGetDTO {
 
+
+   private Integer idCompra;
     private int codigoUsuario;
     private MetodoPago metodoPago;
     private List<DetalleCompraDTO> detalleCompraDTO;
 
     private LocalDate fechaCompra;
-    private float valorTotal;
+    private Double valorTotal;
 }

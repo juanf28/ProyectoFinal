@@ -11,6 +11,8 @@ import lombok.ToString;
 @ToString
 public class ModeradorDTO {
     private int codigo;
+    private String nombre;
+    private String password;
 
     private String correo;
 }

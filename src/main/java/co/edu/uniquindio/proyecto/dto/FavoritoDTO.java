@@ -1,19 +1,15 @@
 package co.edu.uniquindio.proyecto.dto;
 
-import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Getter
-@Setter
 @AllArgsConstructor
 @NoArgsConstructor
-
-public class TokenDTO {
-
-    @NotNull
-    private String token;
-
-}
+@Getter
+@Setter
+public class FavoritoDTO {
+    private ProductoGetDTO producto;
+    private UsuarioGetDTO usuario;
+    }

@@ -20,7 +20,7 @@ import java.util.List;
 
 @Service
 @AllArgsConstructor
-public class ComentarioServicioImpl implements ComentarioServicio {
+public abstract class ComentarioServicioImpl implements ComentarioServicio {
 
     private final ComentarioRepo comentarioRepo;
     private final UsuarioServicio usuarioServicio;

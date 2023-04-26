@@ -35,6 +35,8 @@ public class ProductoDTO {
     @PositiveOrZero
     private float precio;
 
+    private Integer calificacion;
+
     @Positive
     private int codigoVendedor;
 
