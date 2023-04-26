@@ -11,6 +11,7 @@ import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.jdbc.Sql;
 
 @SpringBootTest
 @Transactional
@@ -20,16 +21,34 @@ public class ProductoTest {
 
     @Autowired
     private ProductoServicio productoServicio;
-    @Autowired
-    private ProductoModerador productoModerador;
+
     @Autowired
     private UsuarioServicio usuarioServicio;
 
     @Test
     public void registrar() throws Exception{
+        /*
         UsuarioDTO usuarioDTO = new UsuarioDTO(1006336782,"Santiago","santiago@email.com","root","calle 19","3165308532");
         int codigo = usuarioServicio.crearUsuario(usuarioDTO);
         Usuario usuario = usuarioServicio.obtener(codigo);
         ProductoDTO productoDTO = new ProductoDTO("Audifonos",01,"De cable",2,20000,01,);
+
+         */
     }
+    @Test
+    @Sql("classpath:dataset.sql")
+    public void eliminar() throws Exception{
+
+    }
+    @Test
+    @Sql("classpath:dataset.sql")
+    public void actualizar() throws Exception{
+
+    }
+    @Test
+    @Sql("classpath:dataset.sql")
+    public void listar() throws Exception{
+
+    }
+
 }

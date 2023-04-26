@@ -40,23 +40,47 @@ public class UsuarioTest {
 
     @Test
     @Sql("classpath:dataset.sql")
-    public void eliminar(){
+    public void eliminar() throws Exception{
+        String correo = usuarioServicio.obtener(1006336782).getEmail();
+        usuarioServicio.eliminarUsuario(1006336782);
 
+        //Assertions.assertNull(UsuarioRepo.findByEmail(correo).orElse(null));
     }
     @Test
     @Sql("classpath:dataset.sql")
     public void actualizar(){
+        /*
+        Usuario usuario = usuarioServicio.obtener(1);
 
+        UsuarioDTO usuarioDTO = new UsuarioDTO(usuario.getCedula(),usuario.getNombreCompleto(),usuario.getEmail(), usuario.getContrasenia(), usuario.getDireccion(),usuario.getNumTelefono());
+
+        int codigo = usuarioServicio.actualizarUsuario(1,usuarioDTO);
+
+        Usuario actualizado = usuarioServicio.obtenerUsuario(codigo);
+
+        Assertions.assertEquals("calle 20", actualizado.getDireccion());
+
+         */
     }
     @Test
     @Sql("classpath:dataset.sql")
     public void obtener(){
+        /*
 
+        Usuario usuario = usuarioServicio.obtenerUsuario(1);
+
+        Assertions.assertNotNull(usuario);
+
+         */
     }
     @Test
     @Sql("classpath:dataset.sql")
     public void listar(){
+        /*
+        List<Usuario> list = usuarioRepo.findAll();
+        System.out.println(list);
 
+         */
     }
 
 }
