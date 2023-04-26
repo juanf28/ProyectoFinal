@@ -14,6 +14,7 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @ToString
+@EqualsAndHashCode
 public class ProductoModerador implements Serializable {
 
     @Id

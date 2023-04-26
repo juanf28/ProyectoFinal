@@ -15,6 +15,7 @@ import java.time.LocalDateTime;
 @Setter
 @NoArgsConstructor
 @ToString
+@EqualsAndHashCode
 public class Comentario implements Serializable {
 
     @Id

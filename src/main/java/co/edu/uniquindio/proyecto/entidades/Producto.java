@@ -38,7 +38,7 @@ public class Producto implements Serializable {
     private LocalDateTime fechaLimite;
 
     @ManyToOne
-    @JoinColumn(name = "codigo_producto")
+    @JoinColumn(name = "codigo_moderador")
     ProductoModerador productoModerador;
 
     @ManyToOne

@@ -12,6 +12,7 @@ public enum MetodoPago {
     EFECTIVO("Efectivo");
 
     private String descripcion;
+
     private int id;
     MetodoPago(String descripcion) {
         this.descripcion = descripcion;
