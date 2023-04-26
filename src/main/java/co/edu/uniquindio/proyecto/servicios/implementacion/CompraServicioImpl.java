@@ -42,8 +42,8 @@ public class CompraServicioImpl implements CompraServicio {
         Usuario usuario = usuarioRepo.findById(compraDTO.getCedulaUsuario()).orElse(null);
 
         List<DetalleCompra> listaDetalles = new ArrayList<>();
-        Compra compra;
-        double totalCompra = 0.0;
+        Compra compra=null;
+        float totalCompra = 0;
         if (usuario == null) {
             try {
                 throw new Exception("El Usuario no existe.");
@@ -63,12 +63,20 @@ public class CompraServicioImpl implements CompraServicio {
                     throw new RuntimeException(e);
                 }
             }
-            DetalleCompra detalleAux = new DetalleCompra(detalleCompraAux.getUnidades(), detalleCompraAux.getPrecio(), producto);
+            DetalleCompra detalleAux = new DetalleCompra();
+            detalleAux.setUnidades(detalleCompraAux.getUnidades());
+            detalleAux.setPrecioProducto(detalleCompraAux.getPrecio());
+            detalleAux.setProducto(producto);
             listaDetalles.add(detalleAux);
             totalCompra += detalleCompraAux.getPrecio();
         }
+        compra = new Compra();
+        compra.setValorTotal(totalCompra);
+        compra.setFechaCompra(LocalDateTime.now());
+        compra.setIdMetodoPago(compraDTO.getMetodoPago().getId());
+        compra.setCodigoUsuario(usuario.getCedula());
 
-        compra = new Compra(totalCompra, LocalDateTime.now(), compraDTO.getMetodoPago(), usuario);
+
         compra = compraRepo.save(compra);
 
         for (DetalleCompra detalle : listaDetalles) {

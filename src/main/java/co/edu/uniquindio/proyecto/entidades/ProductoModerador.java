@@ -7,19 +7,18 @@ import org.hibernate.validator.constraints.Length;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @ToString
 public class ProductoModerador implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @EqualsAndHashCode.Include
-    private Integer codigo;
+    private int codigo;
 
     @Length(max = 50)
     @NotNull
@@ -31,23 +30,19 @@ public class ProductoModerador implements Serializable {
     private LocalDateTime fecha;
 
     @ManyToOne
-    @JoinColumn(nullable = false)
-    private Producto producto;
+    @JoinColumn(name = "codigo_moderador")
+    Moderador moderador;
 
     @ManyToOne
-    @JoinColumn(nullable = false)
-    private Moderador moderador;
+    @JoinColumn(name = "codigo_producto")
+    private Producto producto;
 
-    @Enumerated (EnumType.STRING)
-    @Column(nullable = false)
+
+    @ManyToOne
+    @JoinColumn(name="codigo_estado")
     private Estado estado;
 
-    @Builder
-    public ProductoModerador(String motivo, Producto producto, Moderador moderador, Estado estado) {
-        this.motivo = motivo;
-        this.producto = producto;
-        this.moderador = moderador;
-        this.estado = estado;
-        this.fecha = LocalDateTime.now();
-    }
+
+
+
 }

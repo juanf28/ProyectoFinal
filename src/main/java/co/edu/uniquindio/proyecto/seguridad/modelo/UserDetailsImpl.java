@@ -16,7 +16,7 @@ public class UserDetailsImpl implements UserDetails {
 
     private String username, password;
     private Collection<? extends GrantedAuthority> authorities;
-    public static UserDetailsImpl build(Usuario user){
+    public static UserDetailsImpl build(Persona user){
         List<GrantedAuthority> authorities = new ArrayList<>();
         if(user instanceof Usuario){
             authorities.add( new SimpleGrantedAuthority("CLIENTE") );

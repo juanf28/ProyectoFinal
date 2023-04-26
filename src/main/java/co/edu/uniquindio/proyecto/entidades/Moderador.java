@@ -1,26 +1,16 @@
 package co.edu.uniquindio.proyecto.entidades;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.List;
 
 @Getter
 @Setter
-
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@Entity
 @ToString
+public class Moderador extends Persona {
 
-public class Moderador extends Usuario {
 
-    @Id
-    @EqualsAndHashCode.Include
-    @Column(length = 15, nullable = false)
-    private int codigo;
-    /*
-    @Builder
-    public Moderador(int codigo){
-        super();
-    }
 
-     */
 }

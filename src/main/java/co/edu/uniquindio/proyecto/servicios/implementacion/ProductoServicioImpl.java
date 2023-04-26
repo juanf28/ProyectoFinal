@@ -7,6 +7,7 @@ import co.edu.uniquindio.proyecto.entidades.Categoria;
 import co.edu.uniquindio.proyecto.entidades.Estado;
 import co.edu.uniquindio.proyecto.entidades.Producto;
 import co.edu.uniquindio.proyecto.repositorios.ProductoRepo;
+import co.edu.uniquindio.proyecto.servicios.interfaces.ModeradorServicio;
 import co.edu.uniquindio.proyecto.servicios.interfaces.ProductoServicio;
 import co.edu.uniquindio.proyecto.servicios.interfaces.UsuarioServicio;
 import org.springframework.stereotype.Service;
@@ -19,8 +20,10 @@ import java.util.Optional;
 public class ProductoServicioImpl implements ProductoServicio {
 
     private final ProductoRepo productoRepo;
-
+    private ProductoDTO productoDTO;
     private final UsuarioServicio usuarioServicio;
+
+    private ModeradorServicio moderadorServicio;
 
     public ProductoServicioImpl(ProductoRepo productoRepo, UsuarioServicio usuarioServicio){
         this.productoRepo=productoRepo;
@@ -35,10 +38,8 @@ public class ProductoServicioImpl implements ProductoServicio {
         producto.setDescripcion( productoDTO.getDescripcion() );
         producto.setUnidades( productoDTO.getUnidades() );
         producto.setPrecio( productoDTO.getPrecio() );
-        producto.setVendedor(usuarioServicio.obtener( productoDTO.getCodigoVendedor()));
-        producto.setImagen(productoDTO.getImagenes());
-        producto.setCategoria(productoDTO.getCategorias() );
-        producto.setEstado(Estado.INACTIVO);
+        producto.setCategorias(productoDTO.getCategorias());
+        producto.setVendedor(usuarioServicio.obtener(productoDTO.getCodigoVendedor()));
         producto.setFechaCreacion( LocalDateTime.now() );
         producto.setFechaLimite(LocalDateTime.now().plusDays(60));
 
@@ -113,11 +114,10 @@ public class ProductoServicioImpl implements ProductoServicio {
         producto.setNombre(productoDTO.getNombre());
         producto.setDescripcion(productoDTO.getDescripcion());
         producto.setPrecio(productoDTO.getPrecio());
-        producto.setEstado(productoDTO.getEstado());
-        producto.setCategoria(productoDTO.getCategorias());
+        producto.setCategorias(productoDTO.getCategorias());
         producto.setCodigo(productoDTO.getCodigo());
-        producto.setImagen(productoDTO.getImagenes());
-        producto.setCodigoVendedor(productoDTO.getCodigoVendedor());
+        producto.setImagenes(productoDTO.getImagenes());
+        producto.setCodigo(productoDTO.getCodigo());
         return producto;
     }
 
@@ -126,15 +126,14 @@ public class ProductoServicioImpl implements ProductoServicio {
         ProductoGetDTO productoGetDTO = new ProductoGetDTO(
                producto.getCodigo(),
                 producto.getFechaLimite(),
-                producto.getEstado(),
                 producto.getFechaCreacion(),
                 producto.getNombre(),
                 producto.getDescripcion(),
                 producto.getPrecio(),
                 producto.getUnidades(),
-                producto.getCodigoVendedor(),
-                producto.getImagen(),
-                producto.getCategoria(),
+                producto.getVendedor().getCedula(),
+                producto.getImagenes(),
+                producto.getCategorias(),
                 producto.getVendedor()
         );
 

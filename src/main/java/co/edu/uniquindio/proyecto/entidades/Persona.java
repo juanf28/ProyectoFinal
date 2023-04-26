@@ -1,20 +1,31 @@
 package co.edu.uniquindio.proyecto.entidades;
 
+import jakarta.persistence.*;
 import lombok.Builder;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.io.Serializable;
-// cifuentes y mosquera niches
+
+@MappedSuperclass
+@Getter
+@Setter
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@Inheritance(strategy =  InheritanceType.TABLE_PER_CLASS)
 public class Persona implements Serializable {
+    @Id
+    @EqualsAndHashCode.Include
+    private int cedula;
+
+    @Column(length = 100, nullable = false)
     private String nombreCompleto;
-    private  String cedula;
+
+
+    @Column(length = 50, nullable = false)
+    private String email;
+
+    @Column(length = 15, nullable = false)
     private String contrasenia;
 
-    /*
-    public Persona(String nombreCompleto, String cedula, String contrasenia) {
-        this.nombreCompleto=nombreCompleto;
-        this.cedula=cedula;
-        this.contrasenia=contrasenia;
-    }
-
-     */
 }

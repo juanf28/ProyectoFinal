@@ -76,7 +76,7 @@ public class ComentarioServicioImpl implements ComentarioServicio {
                 comentario.getCodigo(),
                 comentario.getFechaCreacion(),
                 comentario.getMensaje(),
-                comentario.getUsuario().getCodigo(),
+                comentario.getUsuario().getCedula(),
                 comentario.getProducto().getCodigo()
         );
     }
