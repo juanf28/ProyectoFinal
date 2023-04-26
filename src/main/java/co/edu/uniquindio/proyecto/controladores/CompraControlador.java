@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/compras")
 public class CompraControlador {
 
-    private final CompraServicio compraServicio = null;
+    private final CompraServicio compraServicio;
 
     @PostMapping("/crear")
     public ResponseEntity<MensajeDTO> crearCompra(@RequestBody CompraDTO compraDTO) throws Exception {

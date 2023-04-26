@@ -28,11 +28,12 @@ public class UsuarioServicioImpl implements UsuarioServicio {
         }
 
         usuario.setNombreCompleto(usuarioDTO.getNombre());
+        usuario.setCedula(usuarioDTO.getCedula());
         usuario.setEmail(usuarioDTO.getEmail());
         usuario.setNumTelefono(usuarioDTO.getTelefono());
         usuario.setContrasenia(usuarioDTO.getContrasenia());
         usuario.setDireccion(usuarioDTO.getDireccion());
-
+        usuario.setNumTelefono(usuarioDTO.getTelefono());
 
 
         return usuarioRepo.save(usuario).getCedula();

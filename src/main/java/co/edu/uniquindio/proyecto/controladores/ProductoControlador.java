@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 @AllArgsConstructor
 public class ProductoControlador {
 
-    private final ProductoServicio productoServicio = null;
+    private final ProductoServicio productoServicio;
 
     @PostMapping("/crear")
     public ResponseEntity<MensajeDTO>crearProducto(@RequestBody ProductoDTO productoDTO) throws Exception {
@@ -30,7 +30,7 @@ public class ProductoControlador {
     @DeleteMapping("/eliminar/{codigoProducto}")
     public ResponseEntity<MensajeDTO> eliminiarProducto(@PathVariable int codigoProducto) throws Exception{
         productoServicio.eliminarProducto(codigoProducto);
-        return ResponseEntity.status(HttpStatus.OK).body( new MensajeDTO(HttpStatus.OK, false, "Usuario eliminado correctamente") );
+        return ResponseEntity.status(HttpStatus.OK).body( new MensajeDTO(HttpStatus.OK, false, "Producto eliminado correctamente") );
     }
 
     @GetMapping("/obtener/{codigoProducto}")

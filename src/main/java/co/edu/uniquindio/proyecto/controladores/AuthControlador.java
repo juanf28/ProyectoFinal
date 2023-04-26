@@ -27,5 +27,4 @@ public class AuthControlador {
         return ResponseEntity.status(HttpStatus.OK).body( new MensajeDTO(HttpStatus.OK, false, sesionServicio.login(loginUser)) );
     }
 
-
 }

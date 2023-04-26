@@ -14,12 +14,10 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/comentarios")
 public class ComentarioControlador {
 
-    private final ComentarioServicio comentarioServicio = null;
+    private final ComentarioServicio comentarioServicio=null;
 
     @PostMapping("/crear")
-    public ResponseEntity<MensajeDTO> crearCompra(@RequestBody ComentarioDTO comentarioDTO) throws Exception {
+    public ResponseEntity<MensajeDTO> crearComentario(@RequestBody ComentarioDTO comentarioDTO) throws Exception {
         return ResponseEntity.status(HttpStatus.CREATED).body( new MensajeDTO(HttpStatus.CREATED, false, comentarioServicio.crearComentario(comentarioDTO)));
     }
-
-
 }
