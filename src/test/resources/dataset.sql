@@ -22,4 +22,9 @@ insert into comentario values (2,'2023-04-24', "Me interesa",1, 1006336782);
 insert into comentario values (3,'2023-04-23', "Muy caro",1, 1006336782);
 insert into comentario values (4,'2023-04-22', "Excelente",4, 1003345232);
 insert into comentario values (5,'2023-04-21', "Feo",5, 1003345232);
---
+--compra(id, codigo_usuario, fecha_compra, id_metodo_pago, valor_total)
+insert into comentario values (1,1006336782, '2023-03-30',2, 15000);
+insert into comentario values (1,1006336782, '2023-03-30',1, 30000);
+insert into comentario values (1,1005345234, '2023-03-30',3, 40000);
+insert into comentario values (1,1003345232, '2023-03-30',2, 20000);
+insert into comentario values (1,1002345231, '2023-03-30',1, 100000);

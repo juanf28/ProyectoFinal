@@ -134,6 +134,7 @@ public class ProductoServicioImpl implements ProductoServicio {
 
         ProductoGetDTO productoGetDTO = new ProductoGetDTO(
                producto.getCodigo(),
+                producto.getEstado(),
                 producto.getFechaLimite(),
                 producto.getFechaCreacion(),
                 producto.getNombre(),
@@ -143,8 +144,8 @@ public class ProductoServicioImpl implements ProductoServicio {
                 producto.getVendedor().getCedula(),
                 producto.getImagenes(),
                 producto.getCategorias(),
-                producto.getVendedor(),
-                producto.getEstado()
+                producto.getVendedor()
+
         );
 
         return productoGetDTO;
