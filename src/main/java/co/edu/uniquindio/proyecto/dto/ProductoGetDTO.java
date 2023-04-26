@@ -35,4 +35,6 @@ public class ProductoGetDTO {
 
     private Usuario vendedor;
 
+    private Estado estado;
+
 }

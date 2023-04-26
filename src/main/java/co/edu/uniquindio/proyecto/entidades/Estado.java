@@ -2,12 +2,9 @@ package co.edu.uniquindio.proyecto.entidades;
 
 import jakarta.persistence.*;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
+import java.io.Serializable;
 import java.util.List;
 
 
@@ -17,7 +14,8 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class Estado {
+@EqualsAndHashCode
+public class Estado implements Serializable {
 
     @Id
     private Integer codigo;

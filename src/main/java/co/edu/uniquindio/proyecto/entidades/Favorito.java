@@ -3,13 +3,15 @@ package co.edu.uniquindio.proyecto.entidades;
 import jakarta.persistence.*;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
+import lombok.EqualsAndHashCode;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 
 
 import java.io.Serializable;
 
 @Entity
-public class Favorito {
+@EqualsAndHashCode
+public class Favorito implements Serializable {
     @EmbeddedId
     private FavoritoId id;
 

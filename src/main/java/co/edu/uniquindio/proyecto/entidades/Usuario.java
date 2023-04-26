@@ -15,6 +15,7 @@ import java.util.List;
 @Entity
 @Getter
 @Setter
+@EqualsAndHashCode
 @ToString
 public class Usuario extends Persona implements Serializable {
 

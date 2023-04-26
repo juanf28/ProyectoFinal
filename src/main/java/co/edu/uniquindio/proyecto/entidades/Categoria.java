@@ -13,7 +13,8 @@ import java.util.List;
 @Entity
 @Getter
 @Setter
-public class Categoria {
+@EqualsAndHashCode
+public class Categoria implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
