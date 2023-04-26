@@ -42,4 +42,6 @@ public class ProductoDTO {
 
     private List<Categoria> categorias;
 
+
+    private Estado estado;
 }

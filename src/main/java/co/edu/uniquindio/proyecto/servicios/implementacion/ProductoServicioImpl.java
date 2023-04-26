@@ -20,10 +20,10 @@ import java.util.Optional;
 public class ProductoServicioImpl implements ProductoServicio {
 
     private final ProductoRepo productoRepo;
-    private ProductoDTO productoDTO;
+    //private ProductoDTO productoDTO;
     private final UsuarioServicio usuarioServicio;
 
-    private ModeradorServicio moderadorServicio;
+   // private ModeradorServicio moderadorServicio;
 
     public ProductoServicioImpl(ProductoRepo productoRepo, UsuarioServicio usuarioServicio){
         this.productoRepo=productoRepo;
@@ -42,7 +42,7 @@ public class ProductoServicioImpl implements ProductoServicio {
         producto.setVendedor(usuarioServicio.obtener(productoDTO.getCodigoVendedor()));
         producto.setFechaCreacion( LocalDateTime.now() );
         producto.setFechaLimite(LocalDateTime.now().plusDays(60));
-
+        producto.setEstado(productoDTO.getEstado());
         return productoRepo.save( producto ).getCodigo();
 
     }
@@ -60,12 +60,20 @@ public class ProductoServicioImpl implements ProductoServicio {
 
     public int actualizarUnidades(int codigoProducto, int unidades) throws Exception{
 
-        return 0;
+        Producto producto = obtener(codigoProducto);
+
+        producto.setUnidades(unidades);
+
+       return  productoRepo.save(producto).getCodigo();
     }
+
+
 
     public int actualizarEstado(int codigoProducto, Estado estado) throws Exception{
 
-        return 0;
+        Producto producto = obtener(codigoProducto);
+        producto.setEstado(estado);
+        return productoRepo.save(producto).getCodigo();
     }
 
 
@@ -118,6 +126,7 @@ public class ProductoServicioImpl implements ProductoServicio {
         producto.setCodigo(productoDTO.getCodigo());
         producto.setImagenes(productoDTO.getImagenes());
         producto.setCodigo(productoDTO.getCodigo());
+        producto.setEstado(productoDTO.getEstado());
         return producto;
     }
 
@@ -134,7 +143,8 @@ public class ProductoServicioImpl implements ProductoServicio {
                 producto.getVendedor().getCedula(),
                 producto.getImagenes(),
                 producto.getCategorias(),
-                producto.getVendedor()
+                producto.getVendedor(),
+                producto.getEstado()
         );
 
         return productoGetDTO;

@@ -17,9 +17,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-@Setter
-@Getter
-@ToString
+
 @Service
 public class JwtService {
     @Value("${jwt.secret}")

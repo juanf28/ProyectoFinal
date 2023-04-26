@@ -9,6 +9,7 @@ import java.util.List;
 @Setter
 @Entity
 @ToString
+@EqualsAndHashCode
 public class Moderador extends Persona {
 
 
