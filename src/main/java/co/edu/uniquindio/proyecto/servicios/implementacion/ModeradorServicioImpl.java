@@ -45,7 +45,7 @@ public class ModeradorServicioImpl implements ModeradorServicio {
         Optional<Moderador> moderador = moderadorRepo.findById(codigoModerador);
 
         if(moderador.isEmpty() ){
-            throw new Exception("El código "+codigoModerador+" no está asociado a ningún usuario");
+            throw new Exception("El código "+codigoModerador+" no está asociado a ningún Moderador");
         }
 
         return moderador.get();

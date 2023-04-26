@@ -20,7 +20,7 @@ import java.util.List;
 
 @Service
 @AllArgsConstructor
-public abstract class ComentarioServicioImpl implements ComentarioServicio {
+public class ComentarioServicioImpl implements ComentarioServicio {
 
     private final ComentarioRepo comentarioRepo;
     private final UsuarioServicio usuarioServicio;
@@ -47,6 +47,32 @@ public abstract class ComentarioServicioImpl implements ComentarioServicio {
                 emailVendedor));
 
         return comentarioRepo.save(comentario).getCodigo();
+    }
+
+    @Override
+    public ComentarioGetDTO actualizarComentario(int codigoComentario, ComentarioDTO comentarioDTO) throws Exception {
+        return null;
+    }
+
+    @Override
+    public int eliminiarComentario(int codigoComentario) throws Exception {
+        validarExiste(codigoComentario);
+        comentarioRepo.deleteById(codigoComentario);
+        return codigoComentario;
+    }
+
+    private void validarExiste(int codigoComentario) throws Exception{
+
+        boolean existe = comentarioRepo.existsById(codigoComentario);
+
+        if (!existe) {
+            throw new Exception("El código " + codigoComentario + " no está asociado a ningún comentario");
+        }
+    }
+
+    @Override
+    public ComentarioGetDTO obtenerComentario(int codigoComentario) throws Exception {
+        return null;
     }
 
 

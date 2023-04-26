@@ -92,9 +92,7 @@ public class CompraServicioImpl implements CompraServicio {
     }
 
     @Override
-    public CompraGetDTO obtenerCompra(int codigoCompra) {
-        return null;
-    }
+    public CompraGetDTO obtenerCompra(int codigoCompra) {return null;}
 
 
     @Override

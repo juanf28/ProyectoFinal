@@ -91,7 +91,7 @@ public class ProductoServicioImpl implements ProductoServicio {
         Optional<Producto> producto = productoRepo.findById(codigoProducto);
 
         if(producto.isEmpty() ){
-            throw new Exception("El productp "+codigoProducto+" no está asociado a ningún producto");
+            throw new Exception("El producto "+codigoProducto+" no está asociado a ningún producto");
         }
 
         return producto.get();
