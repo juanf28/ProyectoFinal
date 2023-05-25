@@ -19,10 +19,11 @@ import java.util.List;
 public class Compra implements Serializable {
 
     @Id
-    private int id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int codigo;
 
     @Column(nullable = false)
-   private int idMetodoPago;
+   private MetodoPago MetodoPago;
 
 
     @Column(nullable = false)

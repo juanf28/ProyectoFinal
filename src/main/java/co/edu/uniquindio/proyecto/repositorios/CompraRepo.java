@@ -1,8 +1,7 @@
 package co.edu.uniquindio.proyecto.repositorios;
 
+import co.edu.uniquindio.proyecto.dto.CompraGetDTO;
 import co.edu.uniquindio.proyecto.entidades.Compra;
-import co.edu.uniquindio.proyecto.entidades.Producto;
-import org.springframework.data.domain.Page;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -10,11 +9,14 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface CompraRepo extends JpaRepository<Compra,String> {
+public interface CompraRepo extends JpaRepository<Compra,Integer> {
+
+    @Query("select c from Compra c where c.codigo = :codigoCompra")
+    List<CompraGetDTO> listarCompras(int codigoCompra);
 
     @Query("select c from Compra c where c.codigoUsuario = :codigoUsuario")
-    List<Compra> listarCompras(int codigoUsuario);
+    List<CompraGetDTO> listarComprasUsuario(int codigoUsuario);
 
-    @Query("select c from Compra c where c.codigoUsuario = :cedula")
-    List<Compra> listarComprasUsuario(String cedula);
+    @Query("select c from Compra c where c.codigo = :codigoCompra")
+    CompraGetDTO obtenerCompra(int codigoCompra);
 }

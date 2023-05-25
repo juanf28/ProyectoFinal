@@ -16,6 +16,10 @@ public interface ProductoRepo extends JpaRepository<Producto,Integer> {
    @Query("select p from Producto p where p.vendedor = :codigoUsuario")
     List<Producto> listarProductosUsuario(int codigoUsuario);
 
+  // int countByCategoria(int idCategoria);
+   @Query("select count(p.nombre) from Producto p where :categoria member of p.categorias")
+   int obtenerCantidadPorCategoria(Categoria categoria);
+
    @Query("select p from Producto p where p.nombre like concat('%', :nombre, '%') and p.estado = 'ACTIVO'")
     List<Producto> listarProductosNombre(String nombre);
 

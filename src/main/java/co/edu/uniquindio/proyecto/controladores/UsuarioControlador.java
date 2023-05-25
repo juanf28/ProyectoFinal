@@ -1,9 +1,12 @@
 package co.edu.uniquindio.proyecto.controladores;
 
 
+import co.edu.uniquindio.proyecto.dto.ContraseñaDTO;
 import co.edu.uniquindio.proyecto.dto.MensajeDTO;
 import co.edu.uniquindio.proyecto.dto.UsuarioDTO;
+import co.edu.uniquindio.proyecto.entidades.UsuarioEmailDTO;
 import co.edu.uniquindio.proyecto.servicios.interfaces.UsuarioServicio;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -35,5 +38,21 @@ public class UsuarioControlador {
     @GetMapping("/obtener/{codigoUsuario}")
     public ResponseEntity<MensajeDTO> obtenerUsuario(@PathVariable int codigoUsuario) throws Exception{
         return ResponseEntity.status(HttpStatus.OK).body( new MensajeDTO(HttpStatus.OK, false, usuarioServicio.obtenerUsuario(codigoUsuario)));
+    }
+
+    @PutMapping("/cambiarContraseniaAnterior/{idPerson}")
+    public ResponseEntity<MensajeDTO> cambiarConstrasenaAnterior(@PathVariable int idPerson, @Valid @RequestBody ContraseñaDTO passwordDTO) throws Exception{
+        usuarioServicio.cambiarConstrasenaAnterior(idPerson, passwordDTO);
+        return ResponseEntity.status(HttpStatus.OK).body(new MensajeDTO(HttpStatus.OK, false, "Contrasenia cambiada correctamente"));
+    }
+    @PutMapping("/cambiarContrasenaRecuperada/{emailPerson}")
+    public ResponseEntity<MensajeDTO> cambiarContrasenaRecuperada(@PathVariable String emailPerson,@Valid @RequestBody ContraseñaDTO contrasenaDTO) throws Exception{
+        usuarioServicio.cambiarContrasenaRecuperada(emailPerson,contrasenaDTO);
+        return ResponseEntity.status(HttpStatus.OK).body(new MensajeDTO(HttpStatus.OK, false, "Contrasenia cambiada correctamente"));
+    }
+    @PostMapping("/recuperarContrasena/{usuarioEmailDTO}")
+    public ResponseEntity<MensajeDTO> recuperarContrasena(@PathVariable UsuarioEmailDTO usuarioEmailDTO) throws Exception{
+        usuarioServicio.recuperarContrasena(usuarioEmailDTO);
+        return ResponseEntity.status(HttpStatus.OK).body(new MensajeDTO(HttpStatus.OK, false, "Correo enviado correctamente"));
     }
 }

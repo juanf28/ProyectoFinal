@@ -1,11 +1,17 @@
 package co.edu.uniquindio.proyecto.servicios.implementacion;
 
+import co.edu.uniquindio.proyecto.dto.ContraseñaDTO;
+import co.edu.uniquindio.proyecto.dto.EmailDTO;
 import co.edu.uniquindio.proyecto.dto.UsuarioDTO;
 import co.edu.uniquindio.proyecto.dto.UsuarioGetDTO;
 import co.edu.uniquindio.proyecto.entidades.Usuario;
+import co.edu.uniquindio.proyecto.entidades.UsuarioEmailDTO;
 import co.edu.uniquindio.proyecto.repositorios.UsuarioRepo;
+import co.edu.uniquindio.proyecto.servicios.interfaces.EmailServicio;
 import co.edu.uniquindio.proyecto.servicios.interfaces.UsuarioServicio;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -15,6 +21,13 @@ import java.util.Optional;
 public class UsuarioServicioImpl implements UsuarioServicio {
 
     private UsuarioRepo usuarioRepo;
+
+    @Autowired
+    private final PasswordEncoder passwordEncoder;
+
+    @Autowired
+    private final EmailServicio emailServicio;
+
     @Override
     public int crearUsuario(UsuarioDTO usuarioDTO)throws Exception {
 
@@ -68,6 +81,66 @@ public class UsuarioServicioImpl implements UsuarioServicio {
     public UsuarioGetDTO obtenerUsuario(int codigoUsuario) throws Exception{
         return convertir( obtener(codigoUsuario) );
     }
+
+
+    private boolean validatePassword(String newPassword, String newPasswordRepeated) throws Exception {
+
+        if(newPassword.equals(newPasswordRepeated) != true){
+            throw new Exception("Las contraseñas no coinciden");
+        }
+
+        return true;
+    }
+
+    @Override
+    public int cambiarConstrasenaAnterior(int idPerson, ContraseñaDTO passwordDTO) throws Exception {
+        Usuario usuarioEncontrado = usuarioRepo.obtenerUsuario2(idPerson);
+
+        if(usuarioEncontrado == null){
+            throw new Exception("No se encontro una persona con el id " + idPerson);
+        }
+        String newPassword = passwordDTO.getPassword();
+        String newPasswordRepeated = passwordDTO.getPasswordRepeated();
+
+        validatePassword(newPassword,newPasswordRepeated);
+
+        usuarioEncontrado.setContrasenia(passwordEncoder.encode(newPassword));
+
+        usuarioRepo.save(usuarioEncontrado);
+        emailServicio.enviarEmail(new EmailDTO("Se actualizó su contraseña", "Ha actualizado con exito la contraseña de su cuenta", usuarioEncontrado.getEmail()));
+
+        return usuarioEncontrado.getCedula();
+    }
+
+    @Override
+    public void recuperarContrasena(UsuarioEmailDTO usuarioEmailDTO) throws Exception {
+        emailServicio.enviarEmail(new EmailDTO("Recuperar contraseña","Para recuperar su contraseña ingrese al siguiente enlace: https://www.unimarket.com/api/personas/recuperar_contraseña/" + usuarioEmailDTO.getEmail(),usuarioEmailDTO.getEmail()));
+
+
+    }
+    @Override
+    public String cambiarContrasenaRecuperada(String emailPerson, ContraseñaDTO contraseñaDTO) throws Exception {
+        Usuario usuarioEncontrado = usuarioRepo.buscarUsuario(emailPerson);
+
+        if(usuarioEncontrado == null){
+            throw new Exception("No se encontro una persona con el correo " + emailPerson);
+        }
+
+        String newPassword = contraseñaDTO.getPassword();
+        String newPasswordRepeated = contraseñaDTO.getPasswordRepeated();
+
+        validatePassword(newPassword,newPasswordRepeated);
+
+        usuarioEncontrado.setContrasenia(passwordEncoder.encode(newPassword));
+
+        usuarioRepo.save(usuarioEncontrado);
+        emailServicio.enviarEmail(new EmailDTO("Se recuperó su contraseña", "Ha recuperado con exito la contraseña de su cuenta", usuarioEncontrado.getEmail()));
+
+        return usuarioEncontrado.getContrasenia();
+    }
+
+
+
 
     @Override
     public Usuario obtener(int codigoUsuario) throws Exception{

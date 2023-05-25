@@ -30,6 +30,12 @@ public class ProductoServicioImpl implements ProductoServicio {
         this.usuarioServicio=usuarioServicio;
     }
 
+   public int contarProductosCategoria(Categoria categoria)throws Exception {
+
+        return productoRepo.obtenerCantidadPorCategoria(categoria);
+    }
+
+
     @Override
     public int crearProducto(ProductoDTO productoDTO) throws Exception {
 

@@ -21,10 +21,13 @@ public class CompraControlador {
         return ResponseEntity.status(HttpStatus.CREATED).body( new MensajeDTO(HttpStatus.CREATED, false, compraServicio.crearCompra(compraDTO)));
     }
 
-    @GetMapping("/obtener/{codigoProducto}")
-    public ResponseEntity<MensajeDTO> obtenerCompra(@PathVariable int codigoCompra) throws Exception{
-        return ResponseEntity.status(HttpStatus.OK).body( new MensajeDTO(HttpStatus.OK, false, compraServicio.obtenerCompra(codigoCompra)));
+    @GetMapping("/listarComprasUsuario/{codigoUsuario}")
+    public ResponseEntity<MensajeDTO> listarComprasUsuario(@PathVariable int codigoUsuario)throws Exception{
+        return ResponseEntity.status(HttpStatus.OK).body(new MensajeDTO(HttpStatus.OK, false, compraServicio.listarComprasUsuario(codigoUsuario)));
     }
-
+    @GetMapping("/obtenerCompra/{codigoCompra}")
+    public ResponseEntity<MensajeDTO> obtenerCompra(@PathVariable int codigoCompra)throws Exception{
+        return ResponseEntity.status(HttpStatus.OK).body(new MensajeDTO(HttpStatus.OK, false, compraServicio.obtenerCompra(codigoCompra)));
+    }
 
 }

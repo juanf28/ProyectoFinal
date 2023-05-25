@@ -28,6 +28,11 @@ public class DetalleCompra implements Serializable {
     @Column(nullable = false)
     private float precioProducto;
 
+    private float valorTotal;
+ /**
+    @Column(nullable = false)
+    private int codigoProducto;
+*/
     @ManyToOne
     @JoinColumn(name = "codigo_producto")
     private Producto producto;

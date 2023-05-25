@@ -1,22 +1,31 @@
 package co.edu.uniquindio.proyecto.servicios.implementacion;
 
-import co.edu.uniquindio.proyecto.dto.ModeradorDTO;
-import co.edu.uniquindio.proyecto.dto.ModeradorGetDTO;
-import co.edu.uniquindio.proyecto.dto.UsuarioDTO;
-import co.edu.uniquindio.proyecto.dto.UsuarioGetDTO;
+import co.edu.uniquindio.proyecto.dto.*;
+import co.edu.uniquindio.proyecto.entidades.Estado;
 import co.edu.uniquindio.proyecto.entidades.Moderador;
+import co.edu.uniquindio.proyecto.entidades.Producto;
 import co.edu.uniquindio.proyecto.entidades.Usuario;
+import co.edu.uniquindio.proyecto.repositorios.CompraRepo;
 import co.edu.uniquindio.proyecto.repositorios.ModeradorRepo;
-import co.edu.uniquindio.proyecto.servicios.interfaces.ModeradorServicio;
+import co.edu.uniquindio.proyecto.repositorios.ProductoRepo;
+import co.edu.uniquindio.proyecto.servicios.interfaces.*;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
 @AllArgsConstructor
 public class ModeradorServicioImpl implements ModeradorServicio {
     private ModeradorRepo moderadorRepo;
+
+    private final ProductoRepo productoRepo;
+
+
+    @Autowired
+    private final ProductoServicio productoServicio;
 
 
     @Override
@@ -67,5 +76,28 @@ public class ModeradorServicioImpl implements ModeradorServicio {
     private ModeradorGetDTO convertir(Moderador moderador){
         ModeradorGetDTO moderadorGetDTO = new ModeradorGetDTO(moderador.getCedula(),moderador.getNombreCompleto(),moderador.getContrasenia(), moderador.getEmail());
         return moderadorGetDTO;
+    }
+
+    @Override
+    public List<ProductoGetDTO> listarProductos(Estado estado) throws Exception {
+        List<ProductoGetDTO> lista = productoServicio.listarProductosPorEstado(estado);
+        return lista;
+    }
+    @Override
+    public void revisarProducto(int codigoProducto) throws Exception {
+
+        Producto producto = moderadorRepo.revisarProducto(codigoProducto);
+
+        System.out.println("Producto: "+producto.getNombre()+"Precio"+producto.getPrecio());
+    }
+
+    @Override
+    public void cambiarEstado(Estado estado, int codigoProducto) throws Exception {
+
+        Producto producto = productoServicio.obtener(codigoProducto);
+        producto.setEstado(estado);
+
+        (productoRepo.save(producto)).getCodigo();
+
     }
 }
