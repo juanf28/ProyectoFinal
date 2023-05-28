@@ -28,11 +28,9 @@ public class AuthControlador {
     }
 
     @PostMapping("/registro")
-    public ResponseEntity<MensajeDTO> registrarCliente(@Valid @RequestBody UsuarioDTO usuario) throws Exception {
-
-        usuarioServicio.crearUsuario(usuario);
-        return ResponseEntity.status(HttpStatus.CREATED).body(new MensajeDTO(HttpStatus.CREATED,
-                false, "Cliente creado correctamente"));
+    public ResponseEntity<MensajeDTO> registrarUsuario(@RequestBody UsuarioDTO cliente) throws Exception {
+        usuarioServicio.crearUsuario(cliente);
+        return ResponseEntity.status(HttpStatus.CREATED).body(new MensajeDTO(HttpStatus.CREATED, false, "Cliente creado correctamente"));
     }
 
 }
