@@ -23,6 +23,7 @@ class SesionServicioImpl implements SesionServicio {
     @Autowired
     private final JwtService jwtService;
 
+    @Autowired
     private final UserDetailsService userDetailsService;
 
     @Override
@@ -31,9 +32,9 @@ class SesionServicioImpl implements SesionServicio {
                 new UsernamePasswordAuthenticationToken(
                         sesionDTO.getEmail(),
                         sesionDTO.getPassword())
+
         );
         UserDetails user = (UserDetailsImpl) authentication.getPrincipal();
-
         String jwtToken = jwtService.generateToken(user);
         String refreshToken = jwtService.generateRefreshToken(user);
         return new TokenDTO(jwtToken, refreshToken);

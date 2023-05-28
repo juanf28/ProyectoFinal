@@ -4,6 +4,7 @@ import co.edu.uniquindio.proyecto.dto.MensajeDTO;
 import co.edu.uniquindio.proyecto.dto.ProductoDTO;
 import co.edu.uniquindio.proyecto.dto.UsuarioDTO;
 import co.edu.uniquindio.proyecto.entidades.Categoria;
+import co.edu.uniquindio.proyecto.entidades.Estado;
 import co.edu.uniquindio.proyecto.servicios.interfaces.ProductoServicio;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -41,5 +42,12 @@ public class ProductoControlador {
     @GetMapping("/contarProducto/{categoria}")
     public ResponseEntity<MensajeDTO> contarProductosCategoria(@PathVariable Categoria Categoria) throws Exception{
         return ResponseEntity.status(HttpStatus.OK).body(new MensajeDTO(HttpStatus.OK,false, productoServicio.contarProductosCategoria(Categoria)));
+    }
+
+    @GetMapping("/listar")
+    public ResponseEntity<MensajeDTO> listarProductos()throws Exception {
+        Estado estado= Estado.PROBADO;
+
+        return ResponseEntity.status(HttpStatus.OK).body(new MensajeDTO(HttpStatus.OK, false, productoServicio.listarProductosPorEstado(estado)));
     }
 }

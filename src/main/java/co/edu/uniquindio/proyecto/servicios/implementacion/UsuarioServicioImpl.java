@@ -22,10 +22,10 @@ public class UsuarioServicioImpl implements UsuarioServicio {
 
     private UsuarioRepo usuarioRepo;
 
-    @Autowired
+
     private final PasswordEncoder passwordEncoder;
 
-    @Autowired
+
     private final EmailServicio emailServicio;
 
     @Override
@@ -44,7 +44,8 @@ public class UsuarioServicioImpl implements UsuarioServicio {
         usuario.setCedula(usuarioDTO.getCedula());
         usuario.setEmail(usuarioDTO.getEmail());
         usuario.setNumTelefono(usuarioDTO.getTelefono());
-        usuario.setContrasenia(usuarioDTO.getContrasenia());
+        usuario.setPassword(usuarioDTO.getPassword());
+        usuario.setPassword(passwordEncoder.encode(usuario.getPassword()));
         usuario.setDireccion(usuarioDTO.getDireccion());
         usuario.setNumTelefono(usuarioDTO.getTelefono());
 
@@ -104,7 +105,7 @@ public class UsuarioServicioImpl implements UsuarioServicio {
 
         validatePassword(newPassword,newPasswordRepeated);
 
-        usuarioEncontrado.setContrasenia(passwordEncoder.encode(newPassword));
+        usuarioEncontrado.setPassword(passwordEncoder.encode(newPassword));
 
         usuarioRepo.save(usuarioEncontrado);
         emailServicio.enviarEmail(new EmailDTO("Se actualizó su contraseña", "Ha actualizado con exito la contraseña de su cuenta", usuarioEncontrado.getEmail()));
@@ -131,12 +132,12 @@ public class UsuarioServicioImpl implements UsuarioServicio {
 
         validatePassword(newPassword,newPasswordRepeated);
 
-        usuarioEncontrado.setContrasenia(passwordEncoder.encode(newPassword));
+        usuarioEncontrado.setPassword(passwordEncoder.encode(newPassword));
 
         usuarioRepo.save(usuarioEncontrado);
         emailServicio.enviarEmail(new EmailDTO("Se recuperó su contraseña", "Ha recuperado con exito la contraseña de su cuenta", usuarioEncontrado.getEmail()));
 
-        return usuarioEncontrado.getContrasenia();
+        return usuarioEncontrado.getPassword();
     }
 
 
@@ -189,7 +190,7 @@ public class UsuarioServicioImpl implements UsuarioServicio {
         usuario.setEmail( usuarioDTO.getEmail() );
         usuario.setDireccion( usuarioDTO.getDireccion() );
         usuario.setNumTelefono( usuarioDTO.getTelefono() );
-        usuario.setContrasenia( usuarioDTO.getContrasenia() );
+        usuario.setPassword( usuarioDTO.getPassword() );
         return usuario;
     }
 

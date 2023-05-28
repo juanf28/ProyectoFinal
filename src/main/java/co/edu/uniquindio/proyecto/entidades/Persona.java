@@ -25,7 +25,7 @@ public class Persona implements Serializable {
     @Column(length = 50, nullable = false)
     private String email;
 
-    @Column(length = 15, nullable = false)
-    private String contrasenia;
+    @Column(length = 100, nullable = false)
+    private String password;
 
 }

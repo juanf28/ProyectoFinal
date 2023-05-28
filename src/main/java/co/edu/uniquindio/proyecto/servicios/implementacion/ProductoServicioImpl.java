@@ -48,7 +48,7 @@ public class ProductoServicioImpl implements ProductoServicio {
         producto.setVendedor(usuarioServicio.obtener(productoDTO.getCodigoVendedor()));
         producto.setFechaCreacion( LocalDateTime.now() );
         producto.setFechaLimite(LocalDateTime.now().plusDays(60));
-        producto.setEstado(productoDTO.getEstado());
+        producto.setEstado(productoDTO.getEstado().NO_REVISADO);
         return productoRepo.save( producto ).getCodigo();
 
     }

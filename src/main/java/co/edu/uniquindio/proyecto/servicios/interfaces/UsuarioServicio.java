@@ -8,6 +8,8 @@ import co.edu.uniquindio.proyecto.entidades.UsuarioEmailDTO;
 
 public interface UsuarioServicio {
 
+
+
     int crearUsuario(UsuarioDTO usuarioDTO)throws Exception;
 
     UsuarioGetDTO actualizarUsuario(int codigoUsuario, UsuarioDTO usuarioDTO) throws Exception;

@@ -30,7 +30,7 @@ public class UsuarioDTO {
     @NotBlank
     @Email
     @Length(max=150, message = "Contraseña demasiado extensa, excede los 150 caracteres ")
-    private String contrasenia;
+    private String password;
 
     @NotNull
     @NotBlank

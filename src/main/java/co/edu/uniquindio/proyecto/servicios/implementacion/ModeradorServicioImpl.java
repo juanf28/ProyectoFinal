@@ -74,7 +74,7 @@ public class ModeradorServicioImpl implements ModeradorServicio {
     }
 
     private ModeradorGetDTO convertir(Moderador moderador){
-        ModeradorGetDTO moderadorGetDTO = new ModeradorGetDTO(moderador.getCedula(),moderador.getNombreCompleto(),moderador.getContrasenia(), moderador.getEmail());
+        ModeradorGetDTO moderadorGetDTO = new ModeradorGetDTO(moderador.getCedula(),moderador.getNombreCompleto(),moderador.getPassword(), moderador.getEmail());
         return moderadorGetDTO;
     }
 
