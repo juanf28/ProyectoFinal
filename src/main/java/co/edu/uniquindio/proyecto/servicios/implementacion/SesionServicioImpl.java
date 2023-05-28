@@ -12,6 +12,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -22,6 +23,8 @@ class SesionServicioImpl implements SesionServicio {
     @Autowired
     private final JwtService jwtService;
 
+    private final UserDetailsService userDetailsService;
+
     @Override
     public TokenDTO login(SesionDTO sesionDTO) {
         Authentication authentication = authenticationManager.authenticate(
@@ -30,12 +33,26 @@ class SesionServicioImpl implements SesionServicio {
                         sesionDTO.getPassword())
         );
         UserDetails user = (UserDetailsImpl) authentication.getPrincipal();
+
         String jwtToken = jwtService.generateToken(user);
-        return new TokenDTO(jwtToken);
+        String refreshToken = jwtService.generateRefreshToken(user);
+        return new TokenDTO(jwtToken, refreshToken);
     }
 
     @Override
     public void logout(int codigoUsuario) {
 
+    }
+
+    @Override
+    public TokenDTO refreshToken(TokenDTO tokenDTO) throws Exception{
+        String email = jwtService.extractUsername(tokenDTO.getRefreshToken());
+        UserDetailsImpl user = (UserDetailsImpl) userDetailsService.loadUserByUsername(email);
+        if (jwtService.isTokenValid(tokenDTO.getRefreshToken(), user)) {
+            String token = jwtService.generateToken(user);
+
+            return new TokenDTO( token, tokenDTO.getRefreshToken() );
+        }
+        throw new Exception("Error construyendo el token");
     }
 }

@@ -16,4 +16,7 @@ public class TokenDTO {
     @NotNull
     private String token;
 
+    @NotNull
+    private String refreshToken;
+
 }

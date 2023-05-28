@@ -36,7 +36,8 @@ public interface ProductoRepo extends JpaRepository<Producto,Integer> {
     @Query ("select p from Producto p where p.precio>=:precioMinimo and p.precio<=:precioMaximo")
     List<Producto> listarProductosPrecio(float precioMinimo, float precioMaximo);
 
-
+    @Query("select p from Producto p where p.codigo = :codigoProducto")
+    Producto obtenerProducto(int codigoProducto);
 
 
 }
