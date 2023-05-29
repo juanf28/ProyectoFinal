@@ -1,6 +1,7 @@
 package co.edu.uniquindio.proyecto.dto;
 
 import java.util.List;
+
 import co.edu.uniquindio.proyecto.entidades.Categoria;
 import co.edu.uniquindio.proyecto.entidades.Estado;
 import co.edu.uniquindio.proyecto.entidades.Imagen;
@@ -10,8 +11,6 @@ import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.PositiveOrZero;
 import lombok.*;
 import org.hibernate.validator.constraints.Length;
-
-import java.util.List;
 
 @Getter
 @Setter

@@ -14,5 +14,12 @@ import org.springframework.web.bind.annotation.RestController;
 @AllArgsConstructor
 public class CategoriasControlador {
 
+    private final ProductoServicio productoServicio ;
+
+    @GetMapping("/listar")
+    public ResponseEntity<MensajeDTO> listarCategoria() throws Exception{
+        return ResponseEntity.status(200).body( new MensajeDTO(HttpStatus.OK, false, productoServicio.listarCategorias()));
+    }
+
 
 }

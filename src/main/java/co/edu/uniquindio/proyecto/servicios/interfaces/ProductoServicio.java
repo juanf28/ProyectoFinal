@@ -1,6 +1,5 @@
 package co.edu.uniquindio.proyecto.servicios.interfaces;
 
-import ch.qos.logback.core.encoder.EchoEncoder;
 import co.edu.uniquindio.proyecto.dto.ProductoDTO;
 import co.edu.uniquindio.proyecto.dto.ProductoGetDTO;
 import co.edu.uniquindio.proyecto.entidades.Categoria;
@@ -42,6 +41,7 @@ public interface ProductoServicio {
 
    void eliminarFavorito(int codigoProducto, int codigoUsuario) throws Exception;
 
+   public List<Categoria> listarCategorias() throws Exception;
 
 
 }

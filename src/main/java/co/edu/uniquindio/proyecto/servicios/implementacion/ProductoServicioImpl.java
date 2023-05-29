@@ -9,7 +9,6 @@ import co.edu.uniquindio.proyecto.entidades.Producto;
 import co.edu.uniquindio.proyecto.entidades.Usuario;
 import co.edu.uniquindio.proyecto.repositorios.ProductoRepo;
 import co.edu.uniquindio.proyecto.repositorios.UsuarioRepo;
-import co.edu.uniquindio.proyecto.servicios.interfaces.ModeradorServicio;
 import co.edu.uniquindio.proyecto.servicios.interfaces.ProductoServicio;
 import co.edu.uniquindio.proyecto.servicios.interfaces.UsuarioServicio;
 import org.springframework.stereotype.Service;
@@ -259,6 +258,14 @@ public class ProductoServicioImpl implements ProductoServicio {
         }else{
             throw new Exception("El usuario y/o producto no existen");
         }
+    }
+
+
+    @Override
+    public List<Categoria> listarCategorias() throws Exception {
+        //System.out.println("categorias"+Arrays.asList(Categoria.values()).toString());
+        return new ArrayList<>(Arrays.asList(Categoria.values()));
+
     }
 
 

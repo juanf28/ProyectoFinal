@@ -34,6 +34,10 @@ public class UsuarioServicioImpl implements UsuarioServicio {
 
         Usuario buscado = usuarioRepo.buscarUsuario(usuarioDTO.getEmail());
 
+        if (buscado != null) {
+            throw new Exception("El correo " + usuarioDTO.getEmail() + " ya está en uso");
+        }
+
         Usuario usuario = new Usuario();
 
         String email= "<h1>Creacion de cuenta exitosa</h1><h2><p>En tu cuenta de Unimarket</p></h2>";

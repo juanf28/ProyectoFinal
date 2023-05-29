@@ -3,10 +3,10 @@ package co.edu.uniquindio.proyecto.entidades;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.awt.*;
+
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
+
 import java.util.List;
 
 
@@ -15,15 +15,17 @@ import java.util.List;
 @NoArgsConstructor
 @ToString
 @Entity
-
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Producto implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @EqualsAndHashCode.Include
     private int codigo;
 
     @Column(length = 100, nullable = false)
     private String nombre;
+
 
     @OneToMany(mappedBy = "producto")
     List<Imagen> imagenes;
@@ -57,7 +59,8 @@ public class Producto implements Serializable {
     @OneToMany(mappedBy = "producto")
     List<DetalleCompra> detalleCompraList;
 
-    @ManyToMany(mappedBy = "productos")
+    @ElementCollection
+    @Enumerated(value = EnumType.STRING)
     List<Categoria> categorias;
 
     private Estado estado;
