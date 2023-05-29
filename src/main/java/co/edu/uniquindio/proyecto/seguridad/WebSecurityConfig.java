@@ -35,10 +35,11 @@ public class WebSecurityConfig {
            //     "/api/productos/actualizar/**",
              //   "/api/productos/obtener/**").permitAll();
         http.authorizeHttpRequests().anyRequest().permitAll();
-        http.exceptionHandling().authenticationEntryPoint(jwtEntryPoint);
-        http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-        http.authenticationProvider(authenticationProvider);
-        http.addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
+
+      //  http.exceptionHandling().authenticationEntryPoint(jwtEntryPoint);
+     //   http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+     //   http.authenticationProvider(authenticationProvider);
+    //    http.addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
     }
