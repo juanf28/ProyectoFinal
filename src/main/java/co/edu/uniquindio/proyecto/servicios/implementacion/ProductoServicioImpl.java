@@ -6,7 +6,9 @@ import co.edu.uniquindio.proyecto.dto.ProductoGetDTO;
 import co.edu.uniquindio.proyecto.entidades.Categoria;
 import co.edu.uniquindio.proyecto.entidades.Estado;
 import co.edu.uniquindio.proyecto.entidades.Producto;
+import co.edu.uniquindio.proyecto.entidades.Usuario;
 import co.edu.uniquindio.proyecto.repositorios.ProductoRepo;
+import co.edu.uniquindio.proyecto.repositorios.UsuarioRepo;
 import co.edu.uniquindio.proyecto.servicios.interfaces.ModeradorServicio;
 import co.edu.uniquindio.proyecto.servicios.interfaces.ProductoServicio;
 import co.edu.uniquindio.proyecto.servicios.interfaces.UsuarioServicio;
@@ -20,10 +22,11 @@ import java.util.Optional;
 public class ProductoServicioImpl implements ProductoServicio {
 
     private final ProductoRepo productoRepo;
-    //private ProductoDTO productoDTO;
+
     private final UsuarioServicio usuarioServicio;
 
-   // private ModeradorServicio moderadorServicio;
+    UsuarioRepo usuarioRepo;
+
 
     public ProductoServicioImpl(ProductoRepo productoRepo, UsuarioServicio usuarioServicio){
         this.productoRepo=productoRepo;
@@ -229,4 +232,32 @@ public class ProductoServicioImpl implements ProductoServicio {
             throw new Exception("El código " + codigoProducto + " no está asociado a ningún producto");
         }
     }
+
+    @Override
+    public void guardarFavorito(int codigoProducto, int codigoUsuario) throws Exception {
+        Usuario usuarioEncontrado=usuarioServicio.obtener(codigoUsuario);
+        Producto productoEncontrado= productoRepo.obtenerProducto(codigoProducto);
+
+        if(usuarioEncontrado != null && productoEncontrado != null) {
+          //  usuarioEncontrado.getFavoritos().add();
+
+            usuarioRepo.save(usuarioEncontrado);
+        }else{
+            throw new Exception("El usuario y/o producto no existen");
+        }
+    }
+
+    @Override
+    public void eliminarFavorito(int codigoProducto, int codigoUsuario) throws Exception {
+        Usuario usuarioEncontrado=usuarioServicio.obtener(codigoUsuario);
+        Producto productoEncontrado= productoRepo.obtenerProducto(codigoProducto);
+
+        if(usuarioEncontrado != null && productoEncontrado != null) {
+            usuarioEncontrado.getFavoritos().remove(productoEncontrado);
+            usuarioRepo.save(usuarioEncontrado);
+        }else{
+            throw new Exception("El usuario y/o producto no existen");
+        }
+    }
+
 }

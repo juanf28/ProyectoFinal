@@ -38,9 +38,6 @@ public class ProductoModerador implements Serializable {
     @JoinColumn(name = "codigo_producto")
     private Producto producto;
 
-
-    @ManyToOne
-    @JoinColumn(name="codigo_estado")
     private Estado estado;
 
 

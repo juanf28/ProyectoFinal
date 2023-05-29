@@ -60,7 +60,6 @@ public class Producto implements Serializable {
     @ManyToMany(mappedBy = "productos")
     List<Categoria> categorias;
 
-    @ManyToOne
     private Estado estado;
 
 
