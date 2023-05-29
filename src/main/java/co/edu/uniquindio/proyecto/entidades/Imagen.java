@@ -1,3 +1,4 @@
+/**
 package co.edu.uniquindio.proyecto.entidades;
 
 import jakarta.persistence.*;
@@ -25,3 +26,4 @@ public class Imagen implements Serializable {
     private String ruta;
 
 }
+**/

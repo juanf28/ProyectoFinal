@@ -21,11 +21,17 @@ public class ImagenesControlador {
     private CloudinaryServicio cloudinaryServicio;
 
     @PostMapping("/upload")
-    public ResponseEntity<MensajeDTO> subirImagen(@RequestParam("file") MultipartFile file) throws Exception{
-        File imagen = cloudinaryServicio.convertir(file);
-        Map respuesta = cloudinaryServicio.subirImagen(imagen, "co/edu/uniquindio/proyecto");
-        return ResponseEntity.status(HttpStatus.OK).body( new MensajeDTO(HttpStatus.OK, false, respuesta ) );
+    public ResponseEntity<?> upload(@RequestParam MultipartFile multipartFile)throws Exception {
+
+        File file=cloudinaryServicio.convertir(multipartFile);
+        if(file == null){
+            return ResponseEntity.status(HttpStatus.CREATED).body( new MensajeDTO(HttpStatus.CREATED, false, "error al subir la imagen") );
+        }
+        Map datos = cloudinaryServicio.subirImagen(file,"c");
+        return ResponseEntity.status(HttpStatus.CREATED).body( new MensajeDTO(HttpStatus.CREATED, false, datos ) );
+
     }
+
 
     @DeleteMapping("/{id}")
     public ResponseEntity<MensajeDTO> eliminarImagen(@PathVariable String id) throws Exception{

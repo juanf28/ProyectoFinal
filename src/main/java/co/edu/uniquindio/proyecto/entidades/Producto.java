@@ -1,6 +1,7 @@
 package co.edu.uniquindio.proyecto.entidades;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 
@@ -27,8 +28,9 @@ public class Producto implements Serializable {
     private String nombre;
 
 
-    @OneToMany(mappedBy = "producto")
-    List<Imagen> imagenes;
+    @ElementCollection
+    @NotNull
+    List<String> imagenes;
     @Column(nullable = false)
     private String descripcion;
     @Column(nullable = false)
