@@ -27,7 +27,7 @@ public class ImagenesControlador {
         if(file == null){
             return ResponseEntity.status(HttpStatus.CREATED).body( new MensajeDTO(HttpStatus.CREATED, false, "error al subir la imagen") );
         }
-        Map datos = cloudinaryServicio.subirImagen(file,"c");
+        Map datos = cloudinaryServicio.subirImagen(file,"co/edu/uniquindio/proyecto/%s");
         return ResponseEntity.status(HttpStatus.CREATED).body( new MensajeDTO(HttpStatus.CREATED, false, datos ) );
 
     }
