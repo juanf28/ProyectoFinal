@@ -4,8 +4,8 @@ public enum Categoria {
 
     TECNOLOGIA,
     HOGAR,
-    COCHES,
-    PINTURA,
+    CALZADO,
+    ROPA,
     DEPORTE;
 
 }

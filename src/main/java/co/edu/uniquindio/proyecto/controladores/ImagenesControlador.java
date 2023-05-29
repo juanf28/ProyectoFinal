@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
+import java.util.List;
 import java.util.Map;
 
 @AllArgsConstructor
@@ -16,16 +17,16 @@ import java.util.Map;
 @RestController
 public class ImagenesControlador {
 
-    private final CloudinaryServicio cloudinaryServicio;
+    public List<String> url;
+    private CloudinaryServicio cloudinaryServicio;
 
     @PostMapping("/upload")
-    public ResponseEntity<MensajeDTO> subirImagen(@RequestParam("file") MultipartFile file)
-            throws Exception{
+    public ResponseEntity<MensajeDTO> subirImagen(@RequestParam("file") MultipartFile file) throws Exception{
         File imagen = cloudinaryServicio.convertir(file);
         Map respuesta = cloudinaryServicio.subirImagen(imagen, "co/edu/uniquindio/proyecto");
-        return ResponseEntity.status(HttpStatus.OK).body( new MensajeDTO(HttpStatus.OK, false,
-                respuesta ) );
+        return ResponseEntity.status(HttpStatus.OK).body( new MensajeDTO(HttpStatus.OK, false, respuesta ) );
     }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<MensajeDTO> eliminarImagen(@PathVariable String id) throws Exception{
         Map respuesta = cloudinaryServicio.eliminarImagen(id);
