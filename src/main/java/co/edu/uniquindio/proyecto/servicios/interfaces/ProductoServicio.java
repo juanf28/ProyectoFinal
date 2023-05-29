@@ -43,4 +43,5 @@ public interface ProductoServicio {
    void eliminarFavorito(int codigoProducto, int codigoUsuario) throws Exception;
 
 
+
 }

@@ -15,6 +15,7 @@ import co.edu.uniquindio.proyecto.servicios.interfaces.UsuarioServicio;
 import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -259,5 +260,7 @@ public class ProductoServicioImpl implements ProductoServicio {
             throw new Exception("El usuario y/o producto no existen");
         }
     }
+
+
 
 }
