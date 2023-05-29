@@ -36,9 +36,12 @@ public class UsuarioServicioImpl implements UsuarioServicio {
 
         Usuario usuario = new Usuario();
 
-        if (buscado != null){
-            throw new Exception(("El correo "+ usuarioDTO.getEmail() +"ya existe"));
-        }
+        String email= "<h1>Creacion de cuenta exitosa</h1><h2><p>En tu cuenta de Unimarket</p></h2>";
+
+        emailServicio.enviarEmail(new EmailDTO(
+                "Creacion de cuenta",
+                email,
+                usuarioDTO.getEmail()));
 
         usuario.setNombreCompleto(usuarioDTO.getNombre());
         usuario.setCedula(usuarioDTO.getCedula());
