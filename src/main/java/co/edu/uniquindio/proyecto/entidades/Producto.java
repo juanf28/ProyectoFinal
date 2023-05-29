@@ -29,7 +29,6 @@ public class Producto implements Serializable {
 
 
     @ElementCollection
-    @NotNull
     List<String> imagenes;
     @Column(nullable = false)
     private String descripcion;
