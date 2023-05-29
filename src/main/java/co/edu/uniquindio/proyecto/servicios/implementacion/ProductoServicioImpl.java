@@ -48,6 +48,7 @@ public class ProductoServicioImpl implements ProductoServicio {
         producto.setUnidades( productoDTO.getUnidades() );
         producto.setPrecio( productoDTO.getPrecio() );
         producto.setCategorias(productoDTO.getCategorias());
+        producto.setImagenes(productoDTO.getImagenes());
         producto.setVendedor(usuarioServicio.obtener(productoDTO.getCodigoVendedor()));
         producto.setFechaCreacion( LocalDateTime.now() );
         producto.setFechaLimite(LocalDateTime.now().plusDays(60));

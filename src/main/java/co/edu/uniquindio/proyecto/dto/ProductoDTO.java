@@ -4,7 +4,6 @@ import java.util.List;
 
 import co.edu.uniquindio.proyecto.entidades.Categoria;
 import co.edu.uniquindio.proyecto.entidades.Estado;
-import co.edu.uniquindio.proyecto.entidades.Imagen;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
@@ -39,7 +38,7 @@ public class ProductoDTO {
     @Positive
     private int codigoVendedor;
 
-    private List<Imagen> imagenes;
+    private List<String> imagenes;
 
     private List<Categoria> categorias;
 
